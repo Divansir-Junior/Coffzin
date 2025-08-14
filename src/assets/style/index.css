@@ -64,10 +64,16 @@ body {
   height: 40px;
   border-radius: 20px;
   border: none;
-  background-color: #aeb3b8;
-  color: white;
+  background-color:  rgb(114, 66, 66);
+  color:  rgb(255, 255, 255);
   font-size: 16px;
   cursor: pointer;
+}
+
+.container button:hover {
+  background-color: rgb(55, 35, 35);
+  border: 1px solid rgb(114, 66, 66); ;
+  transition: 0.3s;
 }
 
 /* Criar conta */
