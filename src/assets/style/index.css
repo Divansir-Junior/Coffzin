@@ -74,3 +74,7 @@ body {
   padding: 30px;
   color: rgb(228, 228, 228);
 }
+
+.container a { 
+  color: rgb(227, 116, 104);
+}
