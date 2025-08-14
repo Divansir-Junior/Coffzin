@@ -62,11 +62,26 @@ header{
 .page-banner { 
     width: 100%;
     height: 60px;
-   
+    text-align: center;    
+}
+
+/* Título de criar conta*/
+.page-banner h1 { 
+    position: absolute;
+    top: 30%;
+    margin-left: 15px;
+    color: rgb(255, 255, 255);
+    font-size: 30px;
 }
 
 /* Imagem de criar conta */
 .page-banner img {
     width: 100%;
-    height: 300px;
+    height: auto;
+    max-height: 400px;
+    object-fit: cover;
+}
+
+.container { 
+    display: none;
 }
