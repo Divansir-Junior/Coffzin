@@ -1,0 +1,23 @@
+[
+    {
+        "id" : 1,
+        "name" : "Café 1",
+        "img" : "./../assets/img/cafe1.jpg",
+        "price" : 5.00,
+        "desc" : "Cafe com leite e açúcar"
+    },
+    {
+        "id" : 2,
+        "name" : "Café 2",
+        "img" : "./../assets/img/cafe2.jpg",
+        "price" : 6.00,
+        "desc" : "Cafe puro com açúcar"
+    },
+    {
+        "id" : 3,
+        "name" : "Café 3",
+        "img" : "./../assets/img/cafe3.jpg",
+        "price" : 7.00,
+        "desc" : "Cafe com leite e adoçante"
+    }
+]

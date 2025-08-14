@@ -1,0 +1,49 @@
+/* HEADER */
+header{ 
+    width: 100%;
+    height: 90px;
+    position: absolute;
+    top: 0;
+    background-color: rgb(87, 47, 47);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Imagem do Coffzin*/
+.logo { 
+    margin-top: 15px;
+    width: 80px;
+    height: 80px;
+    
+}
+
+/* Conteúdo do header */
+.menu { 
+    display: flex;
+    list-style: none;
+    text-transform: uppercase;
+}
+
+.menu ul  {
+    list-style: none;
+}
+
+/* Conteúdo da lista */
+.menu li { 
+    margin-left: 20px;
+}
+
+.menu li a { 
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+}
+
+ li a:hover { 
+    color: rgb(0, 0, 0);
+    background-color: rgb(117, 77, 77);
+    transition: .5s;
+}
+
