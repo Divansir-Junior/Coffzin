@@ -31,6 +31,7 @@ async function renderProducts() {
             <h3>${product.name}</h3>
             <p>${product.desc}</p>
             <span>R$ ${product.price.toFixed(2)}</span>
+            <button>${product.btnText}</button>
         </div>
     `;
     container.innerHTML += productHTML;
@@ -43,3 +44,5 @@ async function renderProducts() {
 }
 
 renderProducts();
+
+totalPrice();

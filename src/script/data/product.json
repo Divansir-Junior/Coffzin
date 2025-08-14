@@ -4,55 +4,63 @@
         "name" : "Café 1",
         "img" : "../assets/img/products/Coffe2.png",
         "price" : 5.00,
-        "desc" : "Cafe com leite e açúcar"
+        "desc" : "Cafe com leite e açúcar",
+        "btnText" : "BUY"
     },
     {
         "id" : 2,
         "name" : "Café 2",
         "img" : "../assets/img/products/Coffe2.png",
         "price" : 6.00,
-        "desc" : "Cafe puro com açúcar"
+        "desc" : "Cafe puro com açúcar",
+        "btnText" : "BUY"
     },
     {
         "id" : 3,
         "name" : "Café 3",
         "img" : "../assets/img/products/Coffe2.png",
         "price" : 7.00,
-        "desc" : "Cafe com leite e adoçante"
+        "desc" : "Cafe com leite e adoçante",
+        "btnText" : "BUY"
     },
     {
         "id" : 4,
         "name" : "Café 4",
         "img" : "../assets/img/products/Coffe2.png",
         "price" : 8.00,
-        "desc" : "Cafe puro com adoçante"
+        "desc" : "Cafe puro com adoçante",
+        "btnText" : "BUY"
     },
     {
         "id" : 5,
         "name" : "Café 5",
         "img" : "../assets/img/products/Coffe2.png",
         "price" : 9.00,
-        "desc" : "Cafe com leite e açúcar"
+        "desc" : "Cafe com leite e açúcar",
+        "btnText" : "BUY"
     },
     {
         "id" : 6,
         "name" : "Café 6",
         "img" : "../assets/img/products/Coffe2.png",
         "price" : 10.00,
-        "desc" : "Cafe puro com açúcar"
+        "desc" : "Cafe puro com açúcar",
+        "btnText" : "BUY"
     },
     {
         "id" : 7,
         "name" : "Café 7",
         "img" : "../assets/img/products/Coffe2.png",
         "price" : 11.00,
-        "desc" : "Cafe com leite e adoçante"
+        "desc" : "Cafe com leite e adoçante",
+        "btnText" : "BUY"
     },
     {
         "id" : 8,
         "name" : "Café 8",
         "img" : "../assets/img/products/Coffe2.png",
         "price" : 12.00,
-        "desc" : "Cafe puro com adoçante"
+        "desc" : "Cafe puro com adoçante",
+        "btnText" : "BUY"
     }
 ]
