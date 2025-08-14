@@ -16,7 +16,8 @@ async function loadProductData() {
 
 
 async function renderProducts() {
-    const container = document.querySelector('.products .content');
+    const container = document.querySelector('.container'); 
+
 
     try {
         const products = await loadProductData();
@@ -24,16 +25,17 @@ async function renderProducts() {
         container.innerHTML = ''; // limpa o conteúdo antes
 
         products.forEach(product => {
-            const productHTML = `
-                <div class="product-card">
-                    <img src="${product.img}" alt="${product.name}">
-                    <h3>${product.name}</h3>
-                    <p>${product.desc}</p>
-                    <span>R$ ${product.price.toFixed(2)}</span>
-                </div>
-            `;
-            container.innerHTML += productHTML;
-        });
+    const productHTML = `
+        <div class="card">
+            <img src="${product.img}" alt="${product.name}">
+            <h3>${product.name}</h3>
+            <p>${product.desc}</p>
+            <span>R$ ${product.price.toFixed(2)}</span>
+        </div>
+    `;
+    container.innerHTML += productHTML;
+});
+
 
     } catch (error) {
         container.innerHTML = `<p>Erro ao carregar produtos.</p>`;
