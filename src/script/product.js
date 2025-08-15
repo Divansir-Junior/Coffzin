@@ -30,7 +30,9 @@ async function renderProducts() {
             <h3>${product.name}</h3>
             <p>${product.desc}</p>
             <span>R$ ${product.price.toFixed(2)}</span>
-            <button>${product.btnText}</button>
+            
+            <button class="add-to-cart" onclick="addToCart('${product.name}')">${product.btnAdd}</button>
+            <button class="remove-from-cart">${product.btnRemove}</button>
         </div>
     `;
     container.innerHTML += productHTML;
