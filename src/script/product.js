@@ -35,13 +35,25 @@ async function renderProducts() {
     `;
     container.innerHTML += productHTML;
 });
-
-
     } catch (error) {
         container.innerHTML = `<p>Erro ao carregar produtos.</p>`;
     }
 }
 
+// Adiciona ao carrinho de compras 
+function addToCart(product) {
+    console.log("Product added to cart:",product);
+}
+
+// Calcula o preço total da compra 
+async function totalPrice() {
+    const products = await loadProductData();
+    let total = 0;
+    products.forEach(product => {
+        total += product.price;
+    });
+    console.log("Total:" + total)
+}
 renderProducts();
 
 totalPrice();
