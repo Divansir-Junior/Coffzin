@@ -18,7 +18,6 @@ async function loadProductData() {
 async function renderProducts() {
     const container = document.querySelector('.container'); 
 
-
     try {
         const products = await loadProductData();
 

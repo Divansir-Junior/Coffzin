@@ -62,5 +62,13 @@
         "price" : 12.00,
         "desc" : "Cafe puro com adoçante",
         "btnText" : "BUY"
+    },
+    {
+        "id" : 9,
+        "name" : "Café 9",
+        "img" : "../assets/img/products/Coffe2.png",
+        "price" : 13.00,
+        "desc" : "Cafe com leite e açúcar",
+        "btnText" : "BUY"
     }
 ]
