@@ -65,6 +65,7 @@ function addToCart(product) {
     console.log("Product added:", product.name);
     console.log("Carrinho:", cart);
     totalPrice();
+    createdCartContainer();
 }
 
 // Remove do carrinho
@@ -78,6 +79,14 @@ function removeFromCart(product) {
     totalPrice();
 }
 
+// Cria o container do carrinho de compras
+function createdCartContainer() {
+    if(cart.length > 0  ) {
+        document.createElement('div');
+        const cartContainer = document.querySelector('.cart-container');
+        console.log("Carrinho de compras criado com sucesso!");
+    }
+}
 // Calcula o preço total da compra 
 function totalPrice() {
     let total = cart.reduce((sum, product) => sum + product.price, 0);
