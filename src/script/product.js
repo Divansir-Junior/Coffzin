@@ -82,8 +82,9 @@ function removeFromCart(product) {
 // Cria o container do carrinho de compras
 function createdCartContainer() {
     if(cart.length > 0  ) {
-        document.createElement('div');
-        const cartContainer = document.querySelector('.cart-container');
+         const cartContainer = document.createElement('div');
+         cartContainer.classList.add('cart-container');
+         document.body.appendChild(cartContainer);
         console.log("Carrinho de compras criado com sucesso!");
     }
 }
