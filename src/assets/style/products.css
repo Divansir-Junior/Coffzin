@@ -147,6 +147,7 @@ main {
     justify-self: center;
     align-items: center; 
     gap: 40px;
+    display: none;
 }
 
  th { 

@@ -86,6 +86,7 @@ function createdCartContainer() {
     if(cart.length > 0  ) {
          cartContainer.classList.add('cart-container');
          document.body.appendChild(cartContainer);
+         cartContainer.addEventListener('click', showCartContainer);
          console.log("Carrinho de compras criado com sucesso!");
     }
    else {
@@ -94,7 +95,9 @@ function createdCartContainer() {
 }
 
 // Mostra o carrinho de compras
-function showCartContainer(container) {
+function showCartContainer() {
+    const container = document.querySelector(".shopCart");
+    container.style.display = "flex";
 }
 
 // Fecha o carrinho de compras 
