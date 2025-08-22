@@ -106,9 +106,8 @@ function closeCart() {
     const closeBtn = document.getElementById("closeShopCart").addEventListener("click", () => {
         cart.style.display = "none";
     });
-    
-
 }
+
 // Calcula o preço total da compra 
 function totalPrice() {
     let total = cart.reduce((sum, product) => sum + product.price, 0);

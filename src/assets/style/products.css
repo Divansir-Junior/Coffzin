@@ -146,18 +146,20 @@ main {
     flex-direction: column;
     justify-self: center;
     align-items: center; 
-    gap: 40px;
     display: none;
 }
 
  th { 
     color: rgb(221, 204, 204);
-    margin-left: 5px;
+    text-align: center;
 }
 
 td { 
-    text-align: center;
+    text-align: left;
     color: rgb(255, 255, 255);
+      padding: 3px 15px;
+    font-weight: 500;
+    border-bottom: 1px solid rgb(221, 204, 204);
 }
 
 #total { 
