@@ -142,9 +142,26 @@ main {
     top: 40%;
     height: 30%;
     width: 70%;
-    
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    align-items: center; 
+    gap: 40px;
 }
 
+ th { 
+    color: rgb(221, 204, 204);
+    margin-left: 5px;
+}
+
+td { 
+    text-align: center;
+    color: rgb(255, 255, 255);
+}
+
+#total { 
+    color:rgb(221, 204, 204);
+}
 /* Botão de fechar o carrinho */
 #closeShopCart { 
     background-color: transparent;
