@@ -76,17 +76,35 @@ function removeFromCart(product) {
         console.log("Product removed:", product.name);
     }
     console.log("Carrinho:", cart);
+    createdCartContainer();
     totalPrice();
 }
 
 // Cria o container do carrinho de compras
 function createdCartContainer() {
+    const cartContainer = document.createElement('div');
     if(cart.length > 0  ) {
-         const cartContainer = document.createElement('div');
          cartContainer.classList.add('cart-container');
          document.body.appendChild(cartContainer);
-        console.log("Carrinho de compras criado com sucesso!");
+         console.log("Carrinho de compras criado com sucesso!");
     }
+   else {
+        console.log("Carrinho de compras vazio.sasas");
+    }
+}
+
+// Mostra o carrinho de compras
+function showCartContainer(container) {
+}
+
+// Fecha o carrinho de compras 
+function closeCart() {
+    const cart = document.querySelector(".shopCart");
+    const closeBtn = document.getElementById("closeShopCart").addEventListener("click", () => {
+        cart.style.display = "none";
+    });
+    
+
 }
 // Calcula o preço total da compra 
 function totalPrice() {
@@ -96,3 +114,4 @@ function totalPrice() {
 
 // inicia
 renderProducts();
+closeCart();

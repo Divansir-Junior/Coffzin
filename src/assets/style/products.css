@@ -128,3 +128,31 @@ main {
     right: 20px;
     bottom: 5px;
 }
+
+.hidden-cart { 
+    display: none;
+}
+
+/* ---===== CARRINHO DE COMPRAS ---====---====*/
+.shopCart { 
+    background-color: rgb(88, 79, 79);
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 12px;
+    position: fixed;
+    top: 40%;
+    height: 30%;
+    width: 70%;
+    
+}
+
+/* Botão de fechar o carrinho */
+#closeShopCart { 
+    background-color: transparent;
+    color: rgb(255, 255, 255);
+    position: absolute;
+    right:0;
+    border: none;
+    padding: 20px;
+    cursor: pointer;
+    
+}
