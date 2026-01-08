@@ -10,6 +10,7 @@ function checkEmail(email,confirmEmail) {
     return true;
 }
 
+// Cria a conta 
 function createAccount() {
     return {
         userName: document.getElementById("userName").value,
