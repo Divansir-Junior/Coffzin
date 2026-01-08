@@ -10,9 +10,9 @@
     },
     {
         "id" : 2,
-        "name" : "Café 1",
-        "img" : "../assets/img/products/Coffe2.png",
-        "price" : 5.00,
+        "name" : "Café com leite",
+        "img" : "../assets/img/products/VanillaLatte.png",
+        "price" : 25.00,
         "desc" : "Cafe com leite e açúcar",
         "btnAdd" : "+",
         "btnRemove" : "-"
@@ -21,7 +21,7 @@
         "id" : 3,
         "name" : "Café 1",
         "img" : "../assets/img/products/Coffe2.png",
-        "price" : 5.00,
+        "price" : 35.00,
         "desc" : "Cafe com leite e açúcar",
         "btnAdd" : "+",
         "btnRemove" : "-"
