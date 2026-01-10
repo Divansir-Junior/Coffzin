@@ -22,7 +22,7 @@
         <img src="../assets/img/register/banner1.png" alt="Banner do criar conta">
     </div>
     <div class="container">
-        <form action="#" method="post">
+        
             <input type="text" placeholder="NAME*" required>
             <input type="text" placeholder="Last name*" required>
             <input type="date" name="" id="" placeholder="Data de Nascimento (DD/MM/AAAA)*" required>
@@ -32,8 +32,9 @@
             <input id="confirmedEmail" type="email" placeholder="Confirm Email*" required>
             <input type="password" placeholder="Password*" required>
             <input type="password" placeholder="Confirm Password*" required>
-            <button id="createAccount">CREATE ACCOUNT</button>
-        </form>
+            <button id="createAccount" onclick="sendData()">CREATE ACCOUNT</button>
+        
     </div>
+    <script src="../script/register.js"></script>
 </body>
 </html>

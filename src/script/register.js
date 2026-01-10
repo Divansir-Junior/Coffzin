@@ -23,5 +23,11 @@ function createAccount() {
 
 
 function sendData() { 
-
+    document.getElementById("createAccount").addEventListener("click", () => {
+        console.log("Clicou no botao");
+        createAccount();
+    });
 }
+
+
+

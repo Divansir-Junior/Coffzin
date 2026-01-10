@@ -2,25 +2,25 @@
     {
         "id" : 1,
         "name" : "Café 1",
-        "img" : "../assets/img/products/Coffe2.png",
-        "price" : 5.00,
-        "desc" : "Cafe com leite e açúcar",
+        "img" : "../assets/img/products/Coffe1.png",
+        "price" : 25.00,
+        "desc" : "French coffe",
         "btnAdd" : "+",
         "btnRemove" : "-"
     },
     {
         "id" : 2,
-        "name" : "Café com leite",
-        "img" : "../assets/img/products/VanillaLatte.png",
+        "name" : "Vanilla Latte Coffe",
+        "img" : "../assets/img/products/coffe2.png",
         "price" : 25.00,
-        "desc" : "Cafe com leite e açúcar",
+        "desc" : "Vanilla Latte",
         "btnAdd" : "+",
         "btnRemove" : "-"
     },
     {
         "id" : 3,
-        "name" : "Café 1",
-        "img" : "../assets/img/products/Coffe2.png",
+        "name" : "Dark roast Coffe",
+        "img" : "../assets/img/products/Coffe3.png",
         "price" : 35.00,
         "desc" : "Cafe com leite e açúcar",
         "btnAdd" : "+",
@@ -28,8 +28,8 @@
     },
     {
         "id" : 4,
-        "name" : "Café 1",
-        "img" : "../assets/img/products/Coffe2.png",
+        "name" : "Hazelnut Coffe",
+        "img" : "../assets/img/products/Coffe4.png",
         "price" : 5.00,
         "desc" : "Cafe com leite e açúcar",
         "btnAdd" : "+",
@@ -37,8 +37,8 @@
     },
     {
         "id" : 5,
-        "name" : "Café 1",
-        "img" : "../assets/img/products/Coffe2.png",
+        "name" : "Caramel Coffe",
+        "img" : "../assets/img/products/Coffe5.png",
         "price" : 5.00,
         "desc" : "Cafe com leite e açúcar",
         "btnAdd" : "+",
@@ -46,38 +46,12 @@
     },
     {
         "id" : 6,
-        "name" : "Café 1",
-        "img" : "../assets/img/products/Coffe2.png",
-        "price" : 5.00,
-        "desc" : "Cafe com leite e açúcar",
-        "btnAdd" : "+",
-        "btnRemove" : "-"
-    },
-    {
-        "id" : 7,
-       "name" : "Café 1",
-        "img" : "../assets/img/products/Coffe2.png",
-        "price" : 5.00,
-        "desc" : "Cafe com leite e açúcar",
-        "btnAdd" : "+",
-        "btnRemove" : "-"
-    },
-    {
-        "id" : 8,
-       "name" : "Café 1",
-        "img" : "../assets/img/products/Coffe2.png",
-        "price" : 5.00,
-        "desc" : "Cafe com leite e açúcar",
-        "btnAdd" : "+",
-        "btnRemove" : "-"
-    },
-    {
-        "id" : 9,
-        "name" : "Café 1",
-        "img" : "../assets/img/products/Coffe2.png",
+        "name" : "",
+        "img" : "../assets/img/products/Coffe6.png",
         "price" : 5.00,
         "desc" : "Cafe com leite e açúcar",
         "btnAdd" : "+",
         "btnRemove" : "-"
     }
+    
 ]
