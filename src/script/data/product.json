@@ -30,7 +30,7 @@
         "id" : 4,
         "name" : "Hazelnut Coffe",
         "img" : "../assets/img/products/Coffe4.png",
-        "price" : 5.00,
+        "price" : 35.00,
         "desc" : "Cafe com leite e açúcar",
         "btnAdd" : "+",
         "btnRemove" : "-"
@@ -39,16 +39,16 @@
         "id" : 5,
         "name" : "Caramel Coffe",
         "img" : "../assets/img/products/Coffe5.png",
-        "price" : 5.00,
+        "price" : 27.00,
         "desc" : "Cafe com leite e açúcar",
         "btnAdd" : "+",
         "btnRemove" : "-"
     },
     {
         "id" : 6,
-        "name" : "",
+        "name" : "Crunchy Coffe",
         "img" : "../assets/img/products/Coffe6.png",
-        "price" : 5.00,
+        "price" : 23.00,
         "desc" : "Cafe com leite e açúcar",
         "btnAdd" : "+",
         "btnRemove" : "-"
