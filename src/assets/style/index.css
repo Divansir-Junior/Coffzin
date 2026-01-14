@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+
 * {
   margin: 0;
   padding: 0;
@@ -10,10 +13,11 @@ body {
   justify-content: center; 
   align-items: center;     
   background-color: #f0f0f0;
+  font-family: 'Poppins', sans-serif;
 }
 
 .container {
-  max-width: 600px;
+  max-width: 500px;
   width: 100%;
   height: 400px;
   background-color: rgb(60, 29, 29);
@@ -22,6 +26,11 @@ body {
   justify-content: center;
   align-items: center;
   border-radius: 10px;
+}
+
+.container h1 {
+  color: rgb(255, 255, 255);
+  margin-bottom: 20px;
 }
 
 /* Imagem do login */
@@ -50,7 +59,7 @@ body {
   width: 100%;
   height: 40px;
   padding-top: 5px;
-  border-radius: 20px;
+  border-radius:  10px;
   border: 1px solid rgb(248, 246, 246);
   margin-bottom: 20px;
   text-align: center;
@@ -60,9 +69,9 @@ body {
 /* Botão de login */
 .container button {
   margin-top: 10px;
-  width: 30%;
+  width: 70%;
   height: 40px;
-  border-radius: 20px;
+  border-radius: 10px;
   border: none;
   background-color:  rgb(114, 66, 66);
   color:  rgb(255, 255, 255);
@@ -77,11 +86,20 @@ body {
 }
 
 /* Criar conta */
-.container span { 
-  padding: 30px;
+.container span {
+  padding: 10px;
   color: rgb(228, 228, 228);
 }
 
-.container a { 
-  color: rgb(227, 116, 104);
+.container .forgetPass {
+  align-self: flex-start;
+  margin-left: 15%;
+  color: rgb(255, 254, 254);
+  cursor: pointer;
+}
+
+input::placeholder,
+textarea::placeholder {
+    text-align: left;
+      padding: 20px;
 }
