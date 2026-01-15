@@ -1,0 +1,81 @@
+main { 
+    display: flex;
+    flex-direction: column;
+}
+
+/* SECTION PRINCIPAL */
+.mainSection {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 80px;   
+}
+
+/* Botão de ler mais */
+#readMore {
+    width: 40%;
+    height: 100px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: rgb(0, 0, 0);
+    background: linear-gradient(135deg, #ffffff, #fefefe);
+    border: none;
+    border-radius: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+   
+}
+#readMore:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(138, 82, 14, 0.35);
+}
+
+#readMore:active {
+    transform: translateY(0);
+    box-shadow: 0 6px 16px rgba(138, 82, 14, 0.25);
+}
+
+
+/* H1 (sem mudar conteúdo) */
+h1 { 
+    font-size: 50px;
+}
+
+/* PRODUCTS SECTION */
+.productsSection {
+    margin-top: 150px;
+    width: 100%;
+    height: 500px;
+    background-color:  rgb(87, 47, 47);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.glider-contain {
+    text-align: center;
+  max-width: 1000px;
+  margin: 40px auto 0;
+}
+
+.card {
+  background: #1f1f1f;
+  padding: 50px 30px;
+  border-radius: 12px;
+  min-height: 220px;
+   margin: 0 5px
+}
+
+.card span {
+  font-size: 2.5rem;
+}
+
+.card i {
+  width: 42px;
+  height: 42px;
+  margin-bottom: 16px;
+  color: #cfa35a; /* tom café premium */
+}
