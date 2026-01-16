@@ -3,7 +3,7 @@ main {
     flex-direction: column;
 }
 
-/* SECTION PRINCIPAL */
+/* =============== SECTION PRINCIPAL ============= */
 .mainSection {
     display: flex;
     flex-direction: column;
@@ -25,9 +25,8 @@ main {
     border-radius: 16px;
     cursor: pointer;
     transition: all 0.3s ease;
-
-   
 }
+
 #readMore:hover {
     transform: translateY(-4px);
     box-shadow: 0 12px 28px rgba(138, 82, 14, 0.35);
@@ -44,7 +43,7 @@ h1 {
     font-size: 50px;
 }
 
-/* PRODUCTS SECTION */
+/* =================== SECTION DE PRODUTOS ======================== */
 .productsSection {
     margin-top: 150px;
     width: 100%;
@@ -55,12 +54,14 @@ h1 {
     align-items: center;
 }
 
+/* Container dos cards */
 .glider-contain {
     text-align: center;
   max-width: 1000px;
   margin: 40px auto 0;
 }
 
+/* Cards */
 .card {
   background: #1f1f1f;
   padding: 50px 30px;
@@ -73,9 +74,20 @@ h1 {
   font-size: 2.5rem;
 }
 
+/* Ícones em cada card */
 .card i {
   width: 42px;
   height: 42px;
   margin-bottom: 16px;
-  color: #cfa35a; /* tom café premium */
+  background-color: #cfa35a;
+  color: red;
+}
+
+/* ============= FOOTER ================ */
+footer {
+    background-color: rgb(87, 47, 47);
+    color: #fffffe;
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 50px;
 }
