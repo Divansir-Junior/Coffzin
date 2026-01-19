@@ -1,126 +1,89 @@
-let cart = []; // Armazena os produtos do carrinho
-//a
-// Carrega os dados dos produtos do arquivo JSON
+let cart = [];
+
+// Carrega produtos
 async function loadProductData() {
-    try {
-        const response = await fetch('../script/data/product.json'); 
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return await response.json();
-    } catch (error) {
-        console.error('Failed to load product data:', error);
-        throw error;
-    }
+    const response = await fetch('../script/data/product.json');
+    return await response.json();
 }
 
-// Renderiza os produtos e já adiciona eventos
+function limitProducts() {
+    if (cart.length >= 5) {
+        alert("You can't add more than 5 products to the cart.");
+        return false;
+    }
+    return true;
+}
+
+// Renderiza produtos
 async function renderProducts() {
-    const container = document.querySelector('.container'); 
-    try {
-        const products = await loadProductData();
+    const container = document.querySelector('.container');
+    const products = await loadProductData();
 
-        container.innerHTML = ''; // limpa o conteúdo antes
+    container.innerHTML = '';
 
-        products.forEach((product, index) => {
-            const productHTML = `
-                <div class="card">
-                    <img src="${product.img}" alt="${product.name}">
-                    <h3>${product.name}</h3>
-                    <p>${product.desc}</p>
-                    <span>R$ ${product.price.toFixed(2)}</span>
-                    <button class="btnAdd" data-index="${index}">${product.btnAdd}</button>
-                    <button class="btnRemove" data-index="${index}">${product.btnRemove}</button>
-                </div>
-            `;
-            container.innerHTML += productHTML;
-        });
-
-        // adiciona eventos após renderizar
-        const btnsAdd = document.querySelectorAll('.btnAdd');
-        const btnsRemove = document.querySelectorAll('.btnRemove');
-
-        btnsAdd.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const index = btn.getAttribute('data-index');
-                addToCart(products[index]);
-                writeCart(products);
-            });
-        });
-
-        btnsRemove.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const index = btn.getAttribute('data-index');
-                removeFromCart(products[index]);
-            });
-        });
-
-    } catch (error) {
-        container.innerHTML = `<p>Erro ao carregar produtos.</p>`;
-    }
-}
-
-// Atualiza o carrinho de compras
-function updateCart() { 
-    createdCartContainer(); 
-    renderProducts();
-    totalPrice();
-    removeFromCart()
-
-}
-// Adiciona ao carrinho de compras 
-function addToCart(product) {
-    cart.push(product);
-    console.log("Product added:", product.name);
-    console.log("Carrinho:", cart);
-    updateCart();
-}
-
-function writeCart(product) { 
-    const tableName = document.getElementById("nametd");
-    tableName.innerText = product.name;'asas'
-}
-// Remove do carrinho
-function removeFromCart() {
-   cart = cart.filter(p => data.id !== id);
-    console.log("Removido produto id:", id);
-    updateCart();
-  
-}
-
-// Cria o container do carrinho de compras
-function createdCartContainer() {
-    const cartContainer = document.createElement('div');
-    if(cart.length > 0  ) {
-         cartContainer.classList.add('cart-container');
-         document.body.appendChild(cartContainer);
-         cartContainer.addEventListener('click', showCartContainer);
-         console.log("Carrinho de compras criado com sucesso!");
-    }
-   else {
-        console.log("Carrinho de compras vazio.sasas");
-    }
-}
-
-// Mostra o carrinho de compras
-function showCartContainer() {
-    const container = document.querySelector(".shopCart");
-    container.style.display = "flex";
-}
-
-// Fecha o carrinho de compras 
-function closeCart() {
-    const cart = document.querySelector(".shopCart");
-    const closeBtn = document.getElementById("closeShopCart").addEventListener("click", () => {
-        cart.style.display = "none";
+    products.forEach((product, index) => {
+        container.innerHTML += `
+            <div class="card">
+                <img src="${product.img}">
+                <h3>${product.name}</h3>
+                <p>${product.desc}</p>
+                <strong>R$ ${product.price.toFixed(2)}</strong>
+                <button onclick="addToCart(${index})">Add to cart</button>
+            </div>
+        `;
     });
-}
-// Calcula o preço total da compra 
-function totalPrice() {
-    let total = cart.reduce((sum, product) => sum + product.price, 0);
-    console.log("Total: R$ " + total.toFixed(2));
+    window.products = products;
 }
 
+// Abrir / fechar carrinho
+document.getElementById("openCart").addEventListener("click", () => {
+    document.querySelector(".shopCart").style.display = "flex";
+});
 
+document.getElementById("closeShopCart").addEventListener("click", () => {
+    document.querySelector(".shopCart").style.display = "none";
+});
+
+// Adicionar produto
+function addToCart(index) {
+    if (!limitProducts()) return;
+    cart.push(products[index]);
+    updateCart();
+}
+
+// Remover produto
+function removeFromCart(index) {
+    cart.splice(index, 1);
+    updateCart();
+}
+
+// Atualiza carrinho
+function updateCart() {
+    const tbody = document.querySelector(".shopCart tbody");
+    const total = document.getElementById("total");
+    const count = document.getElementById("cartCount");
+
+    tbody.innerHTML = '';
+    let sum = 0;
+
+    cart.forEach((product, index) => {
+        sum += product.price;
+
+        tbody.innerHTML += `
+            <tr>
+                <td>${product.name}</td>
+                <td>1</td>
+                <td>R$ ${product.price.toFixed(2)}</td>
+                <td>
+                    <button onclick="removeFromCart(${index})">✕</button>
+                </td>
+            </tr>
+        `;
+    });
+
+    total.innerText = `Total: R$ ${sum.toFixed(2)}`;
+    count.innerText = cart.length;
+}
+
+// Inicializa
 renderProducts();
-closeCart();

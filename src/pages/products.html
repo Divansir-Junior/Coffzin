@@ -1,62 +1,55 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COFFZIN - Products</title>
     <link rel="stylesheet" href="../assets/style/products.css">
-    <title>COFFZIN</title>
 </head>
 <body>
-     <header>
-        <img src="../assets/img/CoffzinLogo.png" alt="Logo do Coffzin" class="logo">
-        <nav>
-            <ul class="menu">
-                <li><a href="home.html">Home</a></li>
-                <li><a href="/index.html">Login</a></li>
-                <li><a href="about.html">About us</a></li>
-            </ul>
-    </header>
-    <main>
-        <h1>Our Products</h1>
-        <div class="container"></div>
-        <div class="shopCart">
-            <button id="closeShopCart">X</button>
-             <table>
-    <caption>Products list </caption>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Quantity</th>
-        <th>Price</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-      
-        <td data-label="Nome" id="nametd">Café Torrado</td>
-        <td>2</td>
-        <td data-label="Preço">R$ 19,90</td>
-      </tr>
-      <tr>
-        
-        <td data-label="Nome">Chá Verde</td>
-         <td>2</td>
-        <td data-label="Preço">R$ 14,50</td>
-      </tr>
-      <tr>
-       
-        <td data-label="Nome">Chocolate Quente</td>
-         <td>2</td>
-        <td data-label="Preço">R$ 22,00</td>
-      </tr>
-    </tbody>
-    <tfoot>
-      <tr>
-        <td colspan="4" id="total">Total : </td>
-      </tr>
-    </tfoot>
-  </table>
-        </div>
-        <script src="../script/product.js"></script>
+<header class="header">
+    <img src="../assets/img/CoffzinLogo.png" alt="Logo Coffzin" class="logo">
+    <nav>
+        <ul class="menu">
+            <li><a href="home.html">Home</a></li>
+            <li><a href="/index.html">Login</a></li>
+            <li><a href="about.html">About us</a></li>
+        </ul>
+    </nav>
+</header>
+<main>
+    <h1>Our Products</h1>
+    <div class="container"></div>
+    <!-- CARRINHO -->
+    <div class="shopCart">
+        <button id="closeShopCart">✕</button>
+        <h2>Your cart</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Qty</th>
+                    <th>Price</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="4" id="total">Total: R$ 0.00</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+      <button id="openCart" class="cartBtn">
+        <i data-lucide="shopping-cart"></i>
+        <span id="cartCount">0</span>
+    </button>
+</main>
+<script src="https://unpkg.com/lucide@latest"></script>
+<script src="../script/product.js"></script>
+<script>
+    lucide.createIcons();
+</script>
 </body>
 </html>
