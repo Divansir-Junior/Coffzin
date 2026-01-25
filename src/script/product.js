@@ -57,6 +57,18 @@ function removeFromCart(index) {
     updateCart();
 }
 
+// Finalizar compra
+function finalizePurchase() {
+    if (cart.length === 0) {
+        alert("Your cart is empty!");
+        return;
+    }
+
+    alert("Purchase completed successfully!");
+    cart = [];
+    updateCart();
+}
+
 // Atualiza carrinho
 function updateCart() {
     const tbody = document.querySelector(".shopCart tbody");
@@ -76,7 +88,18 @@ function updateCart() {
                 <td>R$ ${product.price.toFixed(2)}</td>
                 <td>
                     <button onclick="removeFromCart(${index})">✕</button>
+                </td> 
+           ${
+                    index === 0
+                        ? `
+                <td rowspan="${cart.length}">
+                    <button class="checkoutBtn" onclick="finalizePurchase()">
+                        Finalizar
+                    </button>
                 </td>
+                `
+                        : ''
+                }
             </tr>
         `;
     });
