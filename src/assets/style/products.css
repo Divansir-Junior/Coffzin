@@ -134,49 +134,132 @@ main {
     display: none;
 }
 
-
-
 /* ---===== CARRINHO DE COMPRAS ---====---====*/
-.shopCart { 
-    background-color: rgb(88, 79, 79);
-    border: 1px solid rgb(0, 0, 0);
-    border-radius: 12px;
-    position: fixed;
-    top: 40%;
-    height: 55%;
-    width: 70%;
-    display: flex;
-    flex-direction: column;
-    justify-self: center;
-    align-items: center; 
+.shopCart {
+    background: #2b1717;
+    border-radius: 18px;
+    box-shadow: 0 25px 60px rgba(0,0,0,.6);
+
+    width: 65%;
+    max-width: 900px;
+    padding: 32px 40px;
+
     display: none;
+    flex-direction: column;
+    gap: 22px;
+
+    color: #f5eaea;
 }
 
- th { 
-    color: rgb(221, 204, 204);
+/* REMOVE QUALQUER FAIXA LATERAL */
+.shopCart::before,
+.shopCart::after {
+    display: none !important;
+}
+
+/* ===== TÍTULO ===== */
+.shopCart h1,
+.shopCart h2 {
     text-align: center;
+    font-size: 1.9rem;
+    font-weight: 600;
+    margin-bottom: 10px;
 }
 
-td { 
+/* ===== TABELA ===== */
+.shopCart table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+/* Cabeçalho */
+.shopCart thead th {
     text-align: left;
-    color: rgb(255, 255, 255);
-      padding: 3px 15px;
+    padding-bottom: 12px;
+    font-size: 0.9rem;
     font-weight: 500;
-    border-bottom: 1px solid rgb(221, 204, 204);
+    color: #d6bebe;
+    border-bottom: 1px solid rgba(255,255,255,.15);
 }
 
-#total { 
-    color:rgb(221, 204, 204);
+/* Linhas */
+.shopCart tbody tr {
+    border-bottom: 1px solid rgba(255,255,255,.08);
 }
 
-/* Botão de fechar o carrinho */
-#closeShopCart { 
-    background-color: transparent;
-    color: rgb(255, 255, 255);
-    position: absolute;
-    right:0;
-    border: none;
-    padding: 20px;
+.shopCart td {
+    padding: 14px 8px;
+    font-size: 0.95rem;
+    color: #f5eaea;
+}
+
+/* Preço em destaque */
+.shopCart td:nth-child(3) {
+    font-weight: 600;
+}
+
+/* ===== BOTÃO REMOVER ===== */
+.shopCart td button {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,.4);
+    color: #fff;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
     cursor: pointer;
 }
 
+.shopCart td button:hover {
+    background: #000;
+}
+
+/* ===== TOTAL ===== */
+#total {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid rgb(240, 240, 240);
+    font-size: 1.4rem;
+    font-weight: 700;
+    text-align: right;
+}
+
+/* ===== FINALIZAR ===== */
+/* REMOVE QUALQUER FOCO / OUTLINE / SOMBRA */
+button,
+button:focus,
+button:active {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* BOTÃO FINALIZAR — RESET TOTAL */
+.checkoutBtn {
+    all: unset !important;
+
+    background: #000;
+    color: #fff;
+
+    padding: 14px 32px;
+    border-radius: 10px;
+
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* hover */
+.checkoutBtn:hover {
+    opacity: 0.85;
+}
+
+/* GARANTE que NÃO herda estilo do botão de remover */
+.shopCart td .checkoutBtn {
+    width: auto !important;
+    height: auto !important;
+    border: none !important;
+    background-clip: padding-box;
+}
