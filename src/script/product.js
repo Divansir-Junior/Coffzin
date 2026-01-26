@@ -14,6 +14,17 @@ function limitProducts() {
     return true;
 }
 
+function isCartEmpty(showAlert = true) {
+    const empty = cart.length === 0;
+
+    if (empty && showAlert) {
+        alert("Your cart is empty!");
+    }
+
+    return empty;
+}
+
+
 // Renderiza produtos
 async function renderProducts() {
     const container = document.querySelector('.container');
@@ -59,15 +70,13 @@ function removeFromCart(index) {
 
 // Finalizar compra
 function finalizePurchase() {
-    if (cart.length === 0) {
-        alert("Your cart is empty!");
-        return;
-    }
+    if (isCartEmpty()) return;
 
     alert("Purchase completed successfully!");
     cart = [];
     updateCart();
 }
+
 
 // Atualiza carrinho
 function updateCart() {
