@@ -17,7 +17,7 @@ new Glider(document.querySelector('.glider'), {
   ]
 });
 
-
+// Função para mover a tela para a seção de produtos
 function readHomePage() {
   const btnGoToProducts = document.getElementById("readMore");
   const target = document.getElementById("products");
