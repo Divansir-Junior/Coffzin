@@ -5,17 +5,15 @@
         "img" : "../assets/img/products/Coffe1.png",
         "price" : 25.00,
         "desc" : "French coffe",
-        "btnAdd" : "+",
-        "btnRemove" : "-"
+        "btnAdd" : "+"
     },
     {
         "id" : 2,
         "name" : "Vanilla Latte Coffe",
-        "img" : "../assets/img/products/coffe2.png",
+        "img" : "../assets/img/products/Coffe2.png",
         "price" : 25.00,
         "desc" : "Vanilla Latte",
-        "btnAdd" : "+",
-        "btnRemove" : "-"
+        "btnAdd" : "+"
     },
     {
         "id" : 3,
@@ -23,8 +21,7 @@
         "img" : "../assets/img/products/Coffe3.png",
         "price" : 35.00,
         "desc" : "Cafe com leite e açúcar",
-        "btnAdd" : "+",
-        "btnRemove" : "-"
+        "btnAdd" : "+"
     },
     {
         "id" : 4,
@@ -32,8 +29,7 @@
         "img" : "../assets/img/products/Coffe4.png",
         "price" : 35.00,
         "desc" : "Cafe com leite e açúcar",
-        "btnAdd" : "+",
-        "btnRemove" : "-"
+        "btnAdd" : "+"
     },
     {
         "id" : 5,
@@ -41,8 +37,7 @@
         "img" : "../assets/img/products/Coffe5.png",
         "price" : 27.00,
         "desc" : "Cafe com leite e açúcar",
-        "btnAdd" : "+",
-        "btnRemove" : "-"
+        "btnAdd" : "+"
     },
     {
         "id" : 6,
@@ -50,8 +45,7 @@
         "img" : "../assets/img/products/Coffe6.png",
         "price" : 23.00,
         "desc" : "Cafe com leite e açúcar",
-        "btnAdd" : "+",
-        "btnRemove" : "-"
+        "btnAdd" : "+"
     }
     
 ]
