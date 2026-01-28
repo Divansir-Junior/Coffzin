@@ -208,6 +208,9 @@ main {
     flex-direction: column;
     gap: 22px;
     color: #f5eaea;
+    position: fixed;
+    top: 30%;
+    
 }
 
 /* Remove estilos para padronizar  */
