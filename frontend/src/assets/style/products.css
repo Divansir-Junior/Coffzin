@@ -116,20 +116,6 @@ main {
     color: #000;
 }
 
-/* =====--====---=== CARRINHO DE COMPRAS ====---===-- */
-.cart-container { 
-    background-image: url("../img/products/shopCart.png");
-    cursor: pointer;
-    background-size: cover;
-    background-position: center;
-    width: 60px;
-    height: 60px;
-    border: 5px solid rgb(88, 79, 79);
-    position: fixed;
-    right: 20px;
-    bottom: 5px;
-}
-
 .hidden-cart { 
     display: none;
 }
