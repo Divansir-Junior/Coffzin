@@ -120,7 +120,7 @@ main {
     display: none;
 }
 
-
+/* ---=====  BOTÃO CARRINHO DE COMPRAS ---====---====*/
 .cartBtn{ 
     display: flex;
     align-items: center;
@@ -128,7 +128,7 @@ main {
     position: fixed;
     bottom: 25px;
     right: 25px;
-    width: 70px;
+    width: 90px;
     height: 40px;
     border: 2px solid #fdfdfd;
     border-radius: 10px;
@@ -139,16 +139,25 @@ main {
     box-shadow: 0 10px 25px rgba(0,0,0,0.25);
 }
 
+/* Contagem de produtos no carrinho */
 #cartCount {
     position: absolute;
-    top: 3px;
-    right: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 2px;
+    right: 1px;
+    width: 20px;
+    height: 20px;
+    background-color: #8f6c62;
     color: #ffffff;
-    width: 6px;
+    font-size: 12px;
     font-weight: 700;
-    
+    border-radius: 50%; 
+   
 }
 
+/* ícone de carrinho */
 .cartBtn  svg   {
     height: 30px;
     width: 28px;
@@ -157,30 +166,27 @@ main {
 }
 
 
-/* ---===== CARRINHO DE COMPRAS ---====---====*/
+/* ---===== CARRINHO DE COMPRAS ABERTO ---====---====*/
 .shopCart {
     background: #2b1717;
     border-radius: 18px;
     box-shadow: 0 25px 60px rgba(0,0,0,.6);
-
     width: 65%;
     max-width: 900px;
     padding: 32px 40px;
-
     display: none;
     flex-direction: column;
     gap: 22px;
-
     color: #f5eaea;
 }
 
-/* REMOVE QUALQUER FAIXA LATERAL */
+/* Remove estilos para padronizar  */
 .shopCart::before,
 .shopCart::after {
     display: none !important;
 }
 
-/* ===== TÍTULO ===== */
+/* Título do carrinho */
 .shopCart h1,
 .shopCart h2 {
     text-align: center;
@@ -189,7 +195,7 @@ main {
     margin-bottom: 10px;
 }
 
-/* ===== TABELA ===== */
+/* Tabela do carrinho */
 .shopCart table {
     width: 100%;
     border-collapse: collapse;
@@ -221,7 +227,7 @@ main {
     font-weight: 600;
 }
 
-/* ===== BOTÃO REMOVER ===== */
+/* Botão de remover item */
 .shopCart td button {
     background: transparent;
     border: 1px solid rgba(255,255,255,.4);
@@ -236,7 +242,7 @@ main {
     background: #000;
 }
 
-/* ===== TOTAL ===== */
+/* Total do carrinho  */
 #total {
     margin-top: 15px;
     padding-top: 15px;
@@ -246,7 +252,6 @@ main {
     text-align: right;
 }
 
-/* ===== FINALIZAR ===== */
 /* REMOVE QUALQUER FOCO / OUTLINE / SOMBRA */
 button,
 button:focus,
@@ -255,31 +260,26 @@ button:active {
     box-shadow: none !important;
 }
 
-/* BOTÃO FINALIZAR — RESET TOTAL */
+/* Botão de finalizar compra - reset de tudo  */
 .checkoutBtn {
     all: unset !important;
-
     background: #000;
     color: #fff;
-
     padding: 14px 32px;
     border-radius: 10px;
-
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
-
     display: inline-flex;
     align-items: center;
     justify-content: center;
 }
 
-/* hover */
 .checkoutBtn:hover {
     opacity: 0.85;
 }
 
-/* GARANTE que NÃO herda estilo do botão de remover */
+/* Sem herdar estilos  */
 .shopCart td .checkoutBtn {
     width: auto !important;
     height: auto !important;
