@@ -4,17 +4,23 @@ function redirectToPages() {
   const btnAboutUs = document.getElementById("contactBtn");
   const btnBuyNow = document.getElementById("buyBtn");
 
-  btnBuyNow.addEventListener("click", () => {
-    window.location.href = "../pages/products.html";
-  });
+  if (btnAboutUs) {
+    btnAboutUs.addEventListener("click", () => {
+      window.location.href = "../pages/contact.html";
+    });
+  }
 
-  btnAboutUs.addEventListener("click", () => {
-    window.location.href = "../pages/contact.html";
-  });
+  if (btnOurProducts) {
+    btnOurProducts.addEventListener("click", () => {
+      window.location.href = "../pages/products.html";
+    });
+  }
 
-  btnOurProducts.addEventListener("click", () => {
-    window.location.href = "../pages/products.html";
-  });
+  if (btnBuyNow) {
+    btnBuyNow.addEventListener("click", () => {
+      window.location.href = "../pages/products.html";
+    });
+  }
 }
 
 redirectToPages();
