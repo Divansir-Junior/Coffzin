@@ -184,7 +184,6 @@ main {
     font-size: 12px;
     font-weight: 700;
     border-radius: 50%; 
-   
 }
 
 /* ícone de carrinho */
@@ -194,7 +193,6 @@ main {
     height: 28px;
     stroke: #fff;
 }
-
 
 /* ---===== CARRINHO DE COMPRAS ABERTO ---====---====*/
 .shopCart {
@@ -210,7 +208,6 @@ main {
     color: #f5eaea;
     position: fixed;
     top: 30%;
-    
 }
 
 /* Remove estilos para padronizar  */
@@ -284,7 +281,26 @@ main {
     font-weight: 700;
     text-align: right;
 }
+/* Botão de fechar carrinho */
+#closeShopCart {
+    height: 30px;
+    width: 30px;
+    font-size: 20px;
+    background-color: transparent;
+    color: rgb(254, 251, 251);
+    border: none;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    cursor: pointer;
+}
 
+#closeShopCart:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(230, 6, 6, 0.35);
+    background-color: red;
+    border-radius: 50%;
+}
 /* REMOVE QUALQUER FOCO / OUTLINE / SOMBRA */
 button,
 button:focus,
