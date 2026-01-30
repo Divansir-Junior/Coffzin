@@ -1,4 +1,4 @@
-package com.coffzin.backend;
+package com.coffzin;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
