@@ -67,4 +67,5 @@ uploads/
 ############################
 # LOGBACK (CORES DO TERMINAL SPRING )
 ############################
-src/main/resources/logback-spring.xml
+backend/coffzin_backend/src/main/resources/logback-spring.xml
+
