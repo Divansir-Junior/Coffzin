@@ -14,14 +14,10 @@ public class SecurityConfig {
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers(
-                    "/v3/api-docs/**",
                     "/swagger-ui/**",
+                    "/v3/api-docs/**",
                     "/swagger-ui.html",
-                    "/h2-console/**",
-                    "/",
-                    "/css/**",
-                    "/js/**",
-                    "/images/**"
+                    "/h2-console/**"
                 ).permitAll()
                 .anyRequest().permitAll()
             )
