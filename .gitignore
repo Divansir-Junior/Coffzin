@@ -63,3 +63,8 @@ application-local.yml
 # UPLOADS (NEW UPLOADS FEATURES)
 ############################
 uploads/
+
+############################
+# LOGBACK (CORES DO TERMINAL SPRING )
+############################
+src/main/resources/logback-spring.xml
