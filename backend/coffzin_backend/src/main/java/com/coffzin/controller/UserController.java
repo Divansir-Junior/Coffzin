@@ -39,6 +39,17 @@ public class UserController {
         return userRepository.findById(id).orElse(null);
     }
 
+    @PutMapping("/{id}")
+    public User updateUser(@PathVariable Long id, @RequestBody User userDetails) {
+        User user = userRepository.findById(id).orElse(null);
+        if (user != null) {
+            user.setUsername(userDetails.getUsername());
+            user.setEmail(userDetails.getEmail());
+            return userRepository.save(user);
+        }
+        return null;
+    }
+
     @DeleteMapping("/{id}")
     public void deleteUser(@PathVariable Long id) {
         userRepository.deleteById(id);
