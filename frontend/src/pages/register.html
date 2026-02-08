@@ -13,29 +13,52 @@
         <nav>
             <ul class="menu">
                 <li><a href="home.html">Home</a></li>
-                 <li><a href="about.html">About us</a></li>
+                <li><a href="about.html">About us</a></li>
                 <li><a href="products.html">Product</a></li>
                 <li><a href="contact.html">Contact us</a></li>
             </ul>
+        </nav>
     </header>
+
     <div class="page-banner">
         <h1>Create an account</h1>
         <img src="../assets/img/register/banner1.png" alt="Banner do criar conta">
     </div>
+
     <div class="container">
         <form id="userForm" class="container">
-            <input type="text" name="firstName" placeholder="Name*" required>
+
+            <!-- NOME -->
+            <input type="text" name="name" placeholder="Name*" required>
+
+            <!-- SOBRENOME -->
             <input type="text" name="lastName" placeholder="Last name*" required>
+
+            <!-- DATA DE NASCIMENTO (formato yyyy-MM-dd automático) -->
             <input type="date" name="birthDate" required>
+
+            <!-- CPF -->
             <input type="text" name="cpf" placeholder="CPF*" required>
-            <input type="text" name="phone" placeholder="Phone number">
+
+            <!-- TELEFONE -->
+            <input type="text" name="phoneNumber" placeholder="Phone number*" required>
+
+            <!-- EMAIL -->
             <input id="email" type="email" name="email" placeholder="Email*" required>
+
+            <!-- CONFIRMAR EMAIL -->
             <input id="confirmedEmail" type="email" name="confirmEmail" placeholder="Confirm Email*" required>
+
+            <!-- SENHA -->
             <input type="password" name="password" placeholder="Password*" required>
+
+            <!-- CONFIRMAR SENHA -->
             <input type="password" name="confirmPassword" placeholder="Confirm Password*" required>
-            <button type="submit" id="createAccount">CREATE ACCOUNT</button>
-</form>
+
+            <button type="submit">CREATE ACCOUNT</button>
+        </form>
     </div>
+
     <script src="../script/register.js"></script>
 </body>
 </html>
