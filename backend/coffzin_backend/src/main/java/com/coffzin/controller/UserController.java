@@ -24,10 +24,10 @@ public class UserController {
         @ApiResponse(responseCode = "400", description = "Invalid data supplied")
     })
 
-    @PostMapping
-    public User createUser(@RequestBody User user) {
-        return userRepository.save(user);
-    }
+    @PostMapping("/batch")
+    public List<User> createUsers(@RequestBody List<User> users) {
+    return userRepository.saveAll(users);
+}
 
     @GetMapping
     public List<User> getAllUsers() {
