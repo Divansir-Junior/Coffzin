@@ -50,6 +50,7 @@ public class UserController {
         return null;
     }
 
+    @Operation(summary = "Delete a new user", description = "Delete a new user in the database")
     @DeleteMapping("/{id}")
     public void deleteUser(@PathVariable Long id) {
         userRepository.deleteById(id);
