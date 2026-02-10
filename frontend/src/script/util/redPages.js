@@ -6,19 +6,19 @@ function redirectToPages() {
   
   if (btnAboutUs) {
     btnAboutUs.addEventListener("click", () => {
-      window.location.href = "../pages/contact.html";
+      window.location.href = "frontend/src/pages/about.html";
     });
   }
 
   if (btnOurProducts) {
     btnOurProducts.addEventListener("click", () => {
-      window.location.href = "../pages/products.html";
+      window.location.href = "frontend/src/pages/products.html";
     });
   }
 
   if (btnBuyNow) {
     btnBuyNow.addEventListener("click", () => {
-      window.location.href = "../pages/products.html";
+      window.location.href = "frontend/src/pages/products.html";
     });
   }
 }
