@@ -1,21 +1,73 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="frontend/src/assets/style/index.css">
-    <title>COFFZIN</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="frontend/src/assets/style/home.css">
+  <link rel="stylesheet" href="frontend/src/assets/style/products.css">
+  <link rel="shortcut icon" href="frontend/src/assets/img/CoffzinLogo.png" type="image/x-icon">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glider-js@1/glider.min.css">
+  <title>Home</title>
 </head>
 <body>
-    <div class="container">
-        <h1>LOGIN</h1>
-        <form class="login-form">
-            <input type="text" placeholder=" Username">
-            <input type="password" placeholder="Password">
-        </form>
-       <span class="forgetPass">Forget the password ? </span>
-       <button id="enterBtn">ENTER</button>
-        <span>Dont have Account? <a href="frontend/src/pages/register.html">Create one </a></span>
+
+<header>
+  <img src="frontend/src/assets/img/CoffzinLogo.png" alt="Coffzin Logo" class="logo">
+
+  <nav>
+    <ul class="menu">
+      <li><a href="products.html">Products</a></li>
+      <li><a href="about.html">About us</a></li>
+      <li><a href="contact.html">Contact us</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <section class="mainSection">
+    <h1>More than coffee, an experience</h1>
+    <button id="readMore">READ MORE </button>
+  </section>
+  <section class="productsSection" id="products">
+    <div class="glider-contain">
+      <div class="glider">
+        <div class="card">
+          <i data-lucide="coffee"></i>
+          <h3>Specialty Beans</h3>
+          <p>Hand-selected to deliver maximum flavor.</p>
+        </div>
+        <div class="card">
+          <i data-lucide="flame"></i>  
+          <h3>Artisan Roasting</h3>
+          <p>Carefully roasted for the perfect aroma.</p>
+        </div>
+        <div class="card">
+          <i data-lucide="sprout"></i>  
+          <h3>Sustainable</h3>
+          <p>Responsible and conscious production.</p>
+        </div>
+        <div class="card">
+          <i data-lucide="pin"></i>  
+          <h3>Controlled Origin</h3>
+          <p>Traceability from bean to cup.</p>
+        </div>
+      </div>
+      <button class="glider-prev">«</button>
+      <button class="glider-next">»</button>
+      <div role="tablist" class="dots"></div>
+      <button class="buy" id="buyBtn">  BUY NOW</button>
     </div>
+  </section>
+  
+</main>
+    <footer>
+    <p>&copy; 2024 Coffzin. All rights reserved.</p>
+    </footer>
+<!-- JS -->
+<script src="https://unpkg.com/lucide@latest"></script>
+<script src="https://cdn.jsdelivr.net/npm/glider-js@1/glider.min.js"></script>
+<script src="frontend/src/script/home.js"></script>
+<script src="frontend/src/script/util/redPages.js"></script>
+
 </body>
 </html>
