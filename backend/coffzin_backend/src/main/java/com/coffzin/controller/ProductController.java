@@ -66,4 +66,21 @@ public class ProductController {
         return ResponseEntity.noContent().build();
 
     }
+
+    @Operation(summary = "Update product by ID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Product updated successfully"),
+            @ApiResponse(responseCode = "404", description = "Product not found")
+    })
+    @PutMapping("/{id}")
+    public ResponseEntity<Product> updateProduct (@PathVariable Long id, @RequestBody Product productDetails) {
+        return productRepository.findById(id).map(product -> {
+            product.setName(productDetails.getName());
+            product.setDescription(productDetails.getDescription());
+            product.setPrice(productDetails.getPrice());
+            product.setQuantity(productDetails.getQuantity());
+            return ResponseEntity.ok(productRepository.save(product));
+        }).orElse(ResponseEntity.notFound().build());
+
+    }
 }
