@@ -1,5 +1,5 @@
 // Função para redirecionar para as páginas 
-function redirectToPages() {
+export function redirectToPages() {
   const btnOurProducts = document.getElementById("prodtBtn");
   const btnAboutUs = document.getElementById("contactBtn");
   const btnBuyNow = document.getElementById("buyBtn");
