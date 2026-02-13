@@ -1,11 +1,11 @@
-package com.coffzin.dto;
+package com.coffzin.dto.request;
+
+import lombok.Getter;
+import lombok.Setter;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 
 import java.time.LocalDate;
-
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Getter
 @Setter
@@ -22,4 +22,3 @@ public class UserRequestDTO {
     private String password;
     
 }
-

@@ -1,4 +1,4 @@
-package com.coffzin.dto;
+package com.coffzin.dto.response;
 
 import com.coffzin.model.User;
 import lombok.AllArgsConstructor;
