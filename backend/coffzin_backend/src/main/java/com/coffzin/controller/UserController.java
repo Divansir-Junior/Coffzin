@@ -1,7 +1,10 @@
 package com.coffzin.controller;
 
+import com.coffzin.dto.response.UserResponseDTO;
 import com.coffzin.model.User;
 import com.coffzin.repository.UserRepository;
+import com.coffzin.service.UserService;
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -18,6 +21,7 @@ import java.util.List;
 public class UserController {
 
     private final UserRepository userRepository;
+    private final UserService userService;
 
     @Operation(summary = "Create a new user")
     @ApiResponses(value = {
@@ -31,8 +35,8 @@ public class UserController {
     }
 
     @GetMapping
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
+    public List<UserResponseDTO> getAllUsers() {
+        return userService.list();
     }
 
     @GetMapping("/{id}")
