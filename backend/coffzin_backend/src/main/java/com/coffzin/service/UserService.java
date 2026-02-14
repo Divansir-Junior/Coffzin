@@ -29,4 +29,11 @@ public class UserService {
                 ))
                 .collect(Collectors.toList());
     }
+
+    public UserResponseDTO getById(Long id) {
+        return userRepository.findById(id)
+                .map(UserResponseDTO::fromEntity)
+                .orElseThrow(() -> new RuntimeException("User not found with id: " + id));
+}
+
 }

@@ -40,21 +40,8 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable Long id) {
-        return userRepository.findById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User userDetails) {
-        return userRepository.findById(id).map(user -> {
-            user.setName(userDetails.getName());
-            user.setLastName(userDetails.getLastName());
-            user.setEmail(userDetails.getEmail());
-            user.setPhoneNumber(userDetails.getPhoneNumber());
-            return ResponseEntity.ok(userRepository.save(user));
-        }).orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<UserResponseDTO> getUserById(@PathVariable Long id) {
+        return ResponseEntity.ok(userService.getById(id));
     }
 
     @DeleteMapping("/{id}")
