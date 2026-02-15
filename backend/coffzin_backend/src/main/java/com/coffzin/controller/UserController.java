@@ -1,8 +1,7 @@
 package com.coffzin.controller;
 
+import com.coffzin.dto.request.UserRequestDTO;
 import com.coffzin.dto.response.UserResponseDTO;
-import com.coffzin.model.User;
-import com.coffzin.repository.UserRepository;
 import com.coffzin.service.UserService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -17,10 +16,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/users")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "*") // libera acesso do seu HTML
+@CrossOrigin(origins = "*")
 public class UserController {
 
-    private final UserRepository userRepository;
     private final UserService userService;
 
     @Operation(summary = "Create a new user")
@@ -29,9 +27,10 @@ public class UserController {
             @ApiResponse(responseCode = "400", description = "Invalid data supplied")
     })
     @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody User user) {
-        User savedUser = userRepository.save(user);
-        return ResponseEntity.ok(savedUser);
+    public ResponseEntity<UserResponseDTO> createUser(
+            @RequestBody UserRequestDTO request
+    ) {
+        return ResponseEntity.ok(userService.create(request));
     }
 
     @GetMapping
@@ -49,12 +48,19 @@ public class UserController {
         return ResponseEntity.ok(userService.getByEmail(email));
     }
 
+    @Operation(summary = "Update a user by ID")
+    @PutMapping("/{id}")
+    public ResponseEntity<UserResponseDTO> updateUser(
+            @PathVariable Long id,
+            @RequestBody UserRequestDTO request
+    ) {
+        return ResponseEntity.ok(userService.updateUser(id, request));
+    }
+
+    @Operation(summary = "Delete a user by ID")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
-        if (!userRepository.existsById(id)) {
-            return ResponseEntity.notFound().build();
-        }
-        userRepository.deleteById(id);
+        userService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
 }
