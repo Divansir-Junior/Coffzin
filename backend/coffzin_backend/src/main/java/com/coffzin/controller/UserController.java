@@ -44,6 +44,11 @@ public class UserController {
         return ResponseEntity.ok(userService.getById(id));
     }
 
+    @GetMapping("/email/{email}")
+    public ResponseEntity<UserResponseDTO> getUserByEmail(@PathVariable String email) {
+        return ResponseEntity.ok(userService.getByEmail(email));
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
         if (!userRepository.existsById(id)) {

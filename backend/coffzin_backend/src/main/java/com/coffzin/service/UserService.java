@@ -35,5 +35,11 @@ public class UserService {
                 .map(UserResponseDTO::fromEntity)
                 .orElseThrow(() -> new RuntimeException("User not found with id: " + id));
 }
+        public UserResponseDTO getByEmail (String email) {
+                return userRepository.findByEmail(email)
+                        .map(UserResponseDTO::fromEntity)
+                        .orElseThrow(() -> new RuntimeException("User not found with email: " + email));
+        }
+
 
 }
