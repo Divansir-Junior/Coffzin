@@ -72,4 +72,10 @@ public class ProductController {
     public List <ProductResponseDTO> listAll () {
         return productService.listProducts()
     }
+
+    @Operation(summary = "Search products by name")
+    @GetMapping("/search/{name}")
+    public List<ProductResponseDTO> searchByName(@PathVariable String name) {
+        return productService.searchProductByName(name);
+    }
 }
