@@ -68,4 +68,20 @@ public class ProductService {
                 .toList();
     }
 
+    public List <ProductResponseDTO> searchProductByDescription (String description ) {
+        return productRepository.findAll()
+                .stream()
+                .filter(product -> product.getDescription().toLowerCase().contains(description.toLowerCase()))
+                .map(ProductResponseDTO::fromEntity)
+                .toList();
+    }
+
+    public List <ProductResponseDTO> searchByPrice (Double price) {
+        return productRepository.findAll()
+                .stream()
+                .filter(product -> product.getPrice().equals(price))
+                .map(ProductResponseDTO::fromEntity)
+                .toList();
+    }
+
 }
