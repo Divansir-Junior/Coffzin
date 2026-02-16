@@ -61,4 +61,15 @@ public class ProductController {
         return ResponseEntity.noContent().build();
     }
 
+    @Operation(summary = "Update a product by ID")
+    @PutMapping("/{id}")
+    public ResponseEntity <ProductResponseDTO> updateProduct (@PathVariable Long id, @RequestBody ProductRequestDTO request) {
+        return ResponseEntity.ok(productService.updateProduct(id, request));
+    }
+
+    @Operation(summary = "List all products")
+    @GetMapping
+    public List <ProductResponseDTO> listAll () {
+        return productService.listProducts()
+    }
 }
