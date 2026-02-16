@@ -84,4 +84,33 @@ public class ProductService {
                 .toList();  
     }
 
+    public List <ProductResponseDTO> searchByStockQuantity (Integer stockQuantity) {
+        return productRepository.findAll()
+                .stream()
+                .filter(product -> product.getQuantity() == stockQuantity)
+                .map(ProductResponseDTO::fromEntity)
+                .toList();
+    }
+
+   public void decreaseStock (Long id, int quantity) {
+
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Product not found with id: " + id));
+
+        if (product.getQuantity() < quantity) {
+            throw new RuntimeException("Not enough stock for product with id: " + id);
+        }
+
+        product.setQuantity(product.getQuantity() - quantity);
+        productRepository.save(product);productRepository.save(product);
+
+   }
+
+   public void increaseStock (Long id, int quantity) {
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Product not found with id: " + id));
+        product.setQuantity(product.getQuantity() + quantity);
+        productRepository.save(product);
+   }
+
 }
