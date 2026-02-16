@@ -57,6 +57,7 @@ Thumbs.db
 # SPRING LOCAL CONFIG
 ############################
 application-local.properties
+application.properties
 application-local.yml
 
 ############################
