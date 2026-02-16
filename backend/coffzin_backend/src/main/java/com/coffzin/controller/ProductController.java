@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.coffzin.model.Product;
 import com.coffzin.repository.ProductRepository;
+import com.coffzin.service.ProductService;
+import com.coffzin.service.UserService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -28,59 +30,11 @@ import lombok.RequiredArgsConstructor;
 @CrossOrigin(origins = "*") 
 public class ProductController {
 
-    private final ProductRepository productRepository;
+   private final ProductService productService;;
 
-    @Operation(summary = "Create a new product")
-    @PostMapping
-    public ResponseEntity <Product> saveProduct(@RequestBody Product product) {
-        Product savedProduct = productRepository.save(product);
-        return ResponseEntity.ok(savedProduct);
+    public ResponseEntity <Product> createProduct (@RequestBody Product product) {
+        return ResponseEntity.ok(productService.createProduct(product));
     }
 
-    @Operation(summary = "Get all products")
-    @GetMapping 
-    public List <Product> getAllProducts () {
-        return productRepository.findAll();
-    }
-
-    @Operation(summary = "Get product by ID")
-    @GetMapping("/{id}")
-    public ResponseEntity <Product> getProductById (@PathVariable Long id) { 
-        return productRepository.findById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
-    }
-
-    @Operation(summary = "Delete product by ID")
-     @ApiResponses(value = {
-            @ApiResponse(responseCode = "204", description = "Product deleted successfully"),
-            @ApiResponse(responseCode = "404", description = "Product not found")
-    })
-    @DeleteMapping("/{id}")
-    public ResponseEntity <Void> deleteProduct (@PathVariable Long id) {
-        if (!productRepository.existsById(id)) {
-            return ResponseEntity.notFound().build();
-        }
-
-        productRepository.deleteById(id);
-        return ResponseEntity.noContent().build();
-
-    }
-
-    @Operation(summary = "Update product by ID")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Product updated successfully"),
-            @ApiResponse(responseCode = "404", description = "Product not found")
-    })
-    @PutMapping("/{id}")
-    public ResponseEntity<Product> updateProduct (@PathVariable Long id, @RequestBody Product productDetails) {
-        return productRepository.findById(id).map(product -> {
-            product.setName(productDetails.getName());
-            product.setDescription(productDetails.getDescription());
-            product.setPrice(productDetails.getPrice());
-            product.setQuantity(productDetails.getQuantity());
-            return ResponseEntity.ok(productRepository.save(product));
-        }).orElse(ResponseEntity.notFound().build());
-
-    }
+    
 }
