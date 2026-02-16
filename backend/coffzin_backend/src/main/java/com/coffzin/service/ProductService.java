@@ -1,5 +1,7 @@
 package com.coffzin.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.coffzin.dto.request.ProductRequestDTO;
@@ -50,6 +52,19 @@ public class ProductService {
         product.setQuantity(request.getStockQuantity());
 
         return ProductResponseDTO.fromEntity(productRepository.save(product));
+    }
+
+    public List <ProductResponseDTO> listProducts () {
+        return productRepository.findAll()
+                .stream()
+                .map(ProductResponseDTO::fromEntity)
+                .toList();
+    }
+
+    public List <ProductResponseDTO> searchProductByName (String name) {
+        return productRepository.findByName(name)
+                .map(ProductResponseDTO::fromEntity)
+                .toList();
     }
 
 }
