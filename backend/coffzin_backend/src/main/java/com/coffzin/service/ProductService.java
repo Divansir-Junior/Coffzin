@@ -79,9 +79,9 @@ public class ProductService {
     public List <ProductResponseDTO> searchByPrice (Double price) {
         return productRepository.findAll()
                 .stream()
-                .filter(product -> product.getPrice().equals(price))
+                .filter(product -> product.getPrice() == price)
                 .map(ProductResponseDTO::fromEntity)
-                .toList();
+                .toList();  
     }
 
 }
