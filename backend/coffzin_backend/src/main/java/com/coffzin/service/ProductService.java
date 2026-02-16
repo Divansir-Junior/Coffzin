@@ -64,6 +64,7 @@ public class ProductService {
     public List <ProductResponseDTO> searchProductByName (String name) {
         return productRepository.findByName(name)
                 .map(ProductResponseDTO::fromEntity)
+                .stream()
                 .toList();
     }
 
