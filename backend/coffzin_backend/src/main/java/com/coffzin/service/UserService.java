@@ -37,6 +37,9 @@ public class UserService {
     }
 
     public UserResponseDTO getById(Long id) {
+        if (id == null) {
+            throw new RuntimeException("User id cannot be null");
+        }
         return userRepository.findById(id)
                 .map(UserResponseDTO::fromEntity)
                 .orElseThrow(() -> new RuntimeException("User not found with id: " + id));
@@ -49,6 +52,9 @@ public class UserService {
     }
 
     public UserResponseDTO updateUser(Long id, UserRequestDTO request) {
+        if (id == null) {
+            throw new RuntimeException("User id cannot be null");
+        }
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
@@ -61,6 +67,9 @@ public class UserService {
     }
 
     public void deleteById(Long id) {
+            if (id == null) {
+            throw new RuntimeException("User id cannot be null");
+        }
         if (!userRepository.existsById(id)) {
             throw new RuntimeException("User not found");
         }
