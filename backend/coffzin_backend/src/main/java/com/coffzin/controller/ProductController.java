@@ -14,6 +14,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.coffzin.dto.request.ProductRequestDTO;
+import com.coffzin.dto.request.UserRequestDTO;
+import com.coffzin.dto.response.ProductResponseDTO;
+import com.coffzin.dto.response.UserResponseDTO;
 import com.coffzin.model.Product;
 import com.coffzin.repository.ProductRepository;
 import com.coffzin.service.ProductService;
@@ -30,11 +34,24 @@ import lombok.RequiredArgsConstructor;
 @CrossOrigin(origins = "*") 
 public class ProductController {
 
-   private final ProductService productService;;
+   private final ProductService productService;
 
-    public ResponseEntity <Product> createProduct (@RequestBody Product product) {
-        return ResponseEntity.ok(productService.createProduct(product));
+   @Operation(summary = "Create a new product")
+   @ApiResponses(value = {
+       @ApiResponse(responseCode = "200", description = "Product created successfully"),
+       @ApiResponse(responseCode = "400", description = "Invalid input data")
+   })
+   @PostMapping
+    public ResponseEntity<ProductResponseDTO> createProduct(
+            @RequestBody ProductRequestDTO request
+    ) {
+        return ResponseEntity.ok(productService.createProduct(request));
     }
 
-    
+    @Operation(summary = "Get a product by ID")  
+    @GetMapping("/{id}")
+    public ResponseEntity <ProductResponseDTO> getProductById (@PathVariable Long id) {
+        return ResponseEntity.ok(productService.getProductById(id));
+    }
+  
 }
