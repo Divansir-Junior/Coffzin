@@ -70,7 +70,7 @@ public class ProductController {
     @Operation(summary = "List all products")
     @GetMapping
     public List <ProductResponseDTO> listAll () {
-        return productService.listProducts()
+        return productService.listProducts();
     }
 
     @Operation(summary = "Search products by name")
