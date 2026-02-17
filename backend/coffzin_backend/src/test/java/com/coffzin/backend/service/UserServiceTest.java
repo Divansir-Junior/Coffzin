@@ -154,6 +154,17 @@ class UserServiceTest {
     verify(userRepository, times(1)).save(any(User.class));
 }
 
+    @Test
+    void deleteUser() {
+        Long userId = 1L;
+
+        when(userRepository.existsById(userId)).thenReturn(true, false);
+        userService.deleteById(userId);
+
+        verify(userRepository, times(1)).existsById(userId);
+        verify(userRepository, times(1)).deleteById(userId);
+    }
+
 
 
 }
