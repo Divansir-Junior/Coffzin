@@ -3,6 +3,7 @@ package com.coffzin.dto.request;
 import java.time.LocalDate;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,6 +12,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class UserRequestDTO {
 
     private String name;
@@ -20,6 +22,9 @@ public class UserRequestDTO {
     private String phoneNumber;
     private String email;
     private String password;
+
+    
+
     
 }
 
