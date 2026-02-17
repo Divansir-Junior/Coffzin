@@ -5,6 +5,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -70,4 +71,40 @@ class UserServiceTest {
         // Garante que o método save foi chamado exatamente uma vez
         verify(userRepository, times(1)).save(any(User.class));
     }
+
+   @Test
+    void getUserById() {
+
+    // Arrange
+    Long userId = 1L;
+
+    User user = new User();
+    user.setId(userId);
+    user.setName("Test User");
+    user.setLastName("Sobrenome");
+    user.setCpf("212.231.212");
+    user.setBirthDate(LocalDate.of(1990, 5, 15));
+    user.setPhoneNumber("11987654321");
+    user.setEmail("testuser@example.com");
+    user.setPassword("bc3");
+
+    when(userRepository.findById(userId)).thenReturn(Optional.of(user));
+
+    // Act
+    UserResponseDTO response = userService.getById(userId);
+
+    // Assert
+    assertNotNull(response);
+    assertEquals(userId, response.getId());
+    assertEquals("Test User", response.getName());
+    assertEquals("testuser@example.com", response.getEmail());
+
+    verify(userRepository, times(1)).findById(userId);
+}
+
+    void updateUser() {
+        
+    }
+
+
 }
