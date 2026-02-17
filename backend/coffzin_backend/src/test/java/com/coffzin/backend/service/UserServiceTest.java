@@ -102,9 +102,58 @@ class UserServiceTest {
     verify(userRepository, times(1)).findById(userId);
 }
 
+    @Test
     void updateUser() {
-        
-    }
+
+    // Arrange
+    Long userId = 1L;
+
+    UserRequestDTO request = UserRequestDTO.builder()
+            .name("Updated User")
+            .lastName("Sobrenome")
+            .cpf("212.231.212")
+            .birthDate(LocalDate.of(1990, 5, 15))
+            .phoneNumber("11987654321")
+            .email("updated@example.com")
+            .password("bc3")
+            .build();
+
+    User existingUser = new User();
+    existingUser.setId(userId);
+    existingUser.setName("Test User");
+    existingUser.setLastName("Sobrenome");
+    existingUser.setCpf("212.231.212");
+    existingUser.setBirthDate(LocalDate.of(1990, 5, 15));
+    existingUser.setPhoneNumber("11987654321");
+    existingUser.setEmail("old@example.com");
+    existingUser.setPassword("bc3");
+
+    User updatedUser = new User();
+    updatedUser.setId(userId);
+    updatedUser.setName("Updated User");
+    updatedUser.setLastName("Sobrenome");
+    updatedUser.setCpf("212.231.212");
+    updatedUser.setBirthDate(LocalDate.of(1990, 5, 15));
+    updatedUser.setPhoneNumber("11987654321");
+    updatedUser.setEmail("updated@example.com");
+    updatedUser.setPassword("bc3");
+
+    when(userRepository.findById(userId)).thenReturn(Optional.of(existingUser));
+    when(userRepository.save(any(User.class))).thenReturn(updatedUser);
+
+    // Act
+    UserResponseDTO response = userService.updateUser(userId, request);
+
+    // Assert
+    assertNotNull(response);
+    assertEquals(userId, response.getId());
+    assertEquals("Updated User", response.getName());
+    assertEquals("updated@example.com", response.getEmail());
+
+    verify(userRepository, times(1)).findById(userId);
+    verify(userRepository, times(1)).save(any(User.class));
+}
+
 
 
 }
