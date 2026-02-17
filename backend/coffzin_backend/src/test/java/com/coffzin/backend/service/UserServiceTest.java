@@ -165,6 +165,25 @@ class UserServiceTest {
         verify(userRepository, times(1)).deleteById(userId);
     }
 
+    @Test
+    void searchByEmail() {
+        String email = "teste@gmail.com";
+
+        User user = new User();
+        user.setId(1L);
+        user.setName("Test User");
+        user.setLastName("Sobrenome");
+        user.setCpf("212.231.212");
+        user.setBirthDate(LocalDate.of(1990, 5, 15));
+        user.setPhoneNumber("11987654321");
+        user.setEmail(email);
+
+        when(userRepository.findByEmail(email)).thenReturn(Optional.of(user));
+        UserResponseDTO response = userService.getByEmail(email);
+        assertNotNull(response);
+        assertEquals(email, response.getEmail());
+        verify(userRepository, times(1)).findByEmail(email);
+    }
 
 
 }
