@@ -2,6 +2,7 @@ package com.coffzin.dto.request;
 
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,6 +11,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class ProductRequestDTO {
 
     @NotBlank(message = "Name is required")
@@ -25,4 +27,5 @@ public class ProductRequestDTO {
     @NotNull(message = "Stock quantity is required")
     @PositiveOrZero(message = "Stock cannot be negative")
     private Integer stockQuantity;
+
 }
