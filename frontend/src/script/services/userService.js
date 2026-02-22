@@ -1,6 +1,5 @@
-const API_URL = "http://localhost:8080/api/users";
-
-export async function createUser() {
+const API_URL = 'http://localhost:8080/api/users';
+ async function createUser() {
     const response = await fetch(API_URL, {
         method : "POST",
         headers : {"Content-Type" : "application/json"},
