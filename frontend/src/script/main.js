@@ -9,6 +9,13 @@ document.addEventListener("DOMContentLoaded", () => {
   initRegisterPage();
   initCarousel();
   redirectToPages();
-  createUser();
+
   if (window.lucide) lucide.createIcons();
 });
+
+  
+document.getElementById("userForm").addEventListener("submit", async function(e) {
+    e.preventDefault(); // impede o form de recarregar a página
+    await createUser();
+});
+  
