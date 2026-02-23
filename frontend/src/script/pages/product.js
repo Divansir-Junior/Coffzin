@@ -43,10 +43,7 @@ document.getElementById("cartOverlay").addEventListener("click", closeCart);
 
 // ─── ADICIONAR PRODUTO ───
 function addToCart(index) {
-    if (cart.length >= 5) {
-        alert("You can't add more than 5 products to the cart.");
-        return;
-    }
+   
     cart.push(products[index]);
     updateCart();
 }
