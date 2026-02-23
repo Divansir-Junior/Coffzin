@@ -10,49 +10,50 @@
 </head>
 <body>
 
-<header>
-    <img src="../assets/img/CoffzinLogo.png" alt="Logo Coffzin" class="logo">
-    <nav>
-        <ul class="menu">
-            <li><a href="/index.html">Home</a></li>
-            <li><a href="about.html">About us</a></li>
-            <li><a href="contact.html">Contact us</a></li>
-        </ul>
-    </nav>
-</header>
+    <header>
+        <img src="../assets/img/CoffzinLogo.png" alt="Logo Coffzin" class="logo">
+        <nav>
+            <ul class="menu">
+                <li><a href="/index.html">Home</a></li>
+                <li><a href="about.html">About us</a></li>
+                <li><a href="contact.html">Contact us</a></li>
+            </ul>
+        </nav>
+    </header>
 
-<main>
-    <h1>Our Products</h1>
-    <div class="container"></div>
+    <main>
+        <h1>Our Products</h1>
+        <div class="container"></div>
 
-    <!-- OVERLAY -->
-    <div class="cartOverlay" id="cartOverlay"></div>
+        <!-- OVERLAY -->
+        <div class="cartOverlay" id="cartOverlay"></div>
 
-    <!-- CARRINHO -->
-    <div class="shopCart" id="shopCart">
-        <div class="cartHeader">
-            <h2>Your cart</h2>
-            <button id="closeShopCart">✕</button>
+        <!-- CARRINHO -->
+        <div class="shopCart" id="shopCart">
+            <div class="cartHeader">
+                <h2>Your cart</h2>
+                <button id="closeShopCart">✕</button>
+            </div>
+            <div class="cartItems" id="cartItems"></div>
+            <div class="cartFooter">
+                <div id="total">Total <span>R$ 0.00</span></div>
+                <button onclick="emptyCart()" style="background:transparent; border:1px solid rgba(255,100,100,0.4); color:#ff6b6b; border-radius:8px; padding:8px 16px; font-size:13px; cursor:pointer; align-self:flex-start;">
+                    🗑 Empty cart
+                </button>
+                <button class="checkoutBtn" onclick="finalizePurchase()">Finalizar compra</button>
+            </div>
         </div>
-        <div class="cartItems" id="cartItems"></div>
-        <div class="cartFooter">
-    <div id="total">Total <span>R$ 0.00</span></div>
-    <button onclick="emptyCart()" style="background:transparent; border:1px solid rgba(255,100,100,0.4); color:#ff6b6b; border-radius:8px; padding:8px 16px; font-size:13px; cursor:pointer; align-self:flex-start;">
-        🗑 Empty cart
-    </button>
-    <button class="checkoutBtn" onclick="finalizePurchase()">Finalizar compra</button>
-</div>
-    </div>
 
-    <!-- BOTÃO ABRIR CARRINHO -->
-    <button id="openCart" class="cartBtn">
-        <i data-lucide="shopping-cart"></i>
-        <span id="cartCount">0</span>
-    </button>
-</main>
+        <!-- BOTÃO ABRIR CARRINHO -->
+        <button id="openCart" class="cartBtn">
+            <i data-lucide="shopping-cart"></i>
+            <span id="cartCount">0</span>
+        </button>
+    </main>
 
-<script src="https://unpkg.com/lucide@latest"></script>
-<script src="../script/pages/product.js"></script>
-<script>lucide.createIcons();</script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="../script/pages/product.js"></script>
+    <script>lucide.createIcons();</script>
+
 </body>
 </html>
