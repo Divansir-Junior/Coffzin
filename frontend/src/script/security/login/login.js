@@ -1,5 +1,5 @@
 
-async function login () { 
+export async function login () { 
     const email = document.getElementById("login").value;
     const password = document.getElementById("pass").value;
 
