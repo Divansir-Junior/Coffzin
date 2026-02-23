@@ -54,6 +54,11 @@ function removeFromCart(index) {
     updateCart();
 }
 
+// Esvaziar o carrinho 
+function emptyCart() {
+    cart = [];
+    updateCart();
+}
 // ─── FINALIZAR COMPRA ───
 function finalizePurchase() {
     if (cart.length === 0) {
@@ -101,6 +106,5 @@ function updateCart() {
     total.innerHTML = `Total <span>R$ ${sum.toFixed(2)}</span>`;
     count.innerText = cart.length;
 }
-
 // ─── INICIALIZA ───
 renderProducts();

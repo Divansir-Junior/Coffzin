@@ -36,9 +36,12 @@
         </div>
         <div class="cartItems" id="cartItems"></div>
         <div class="cartFooter">
-            <div id="total">Total <span>R$ 0.00</span></div>
-            <button class="checkoutBtn" onclick="finalizePurchase()">Finalize purchase</button>
-        </div>
+    <div id="total">Total <span>R$ 0.00</span></div>
+    <button onclick="emptyCart()" style="background:transparent; border:1px solid rgba(255,100,100,0.4); color:#ff6b6b; border-radius:8px; padding:8px 16px; font-size:13px; cursor:pointer; align-self:flex-start;">
+        🗑 Empty cart
+    </button>
+    <button class="checkoutBtn" onclick="finalizePurchase()">Finalizar compra</button>
+</div>
     </div>
 
     <!-- BOTÃO ABRIR CARRINHO -->
