@@ -4,11 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>COFFZIN - Products</title>
+    <link rel="stylesheet" href="../assets/style/global.css">
     <link rel="stylesheet" href="../assets/style/products.css">
     <link rel="shortcut icon" href="../assets/img/CoffzinLogo.png" type="image/x-icon">
 </head>
 <body>
-<header class="header">
+
+<header>
     <img src="../assets/img/CoffzinLogo.png" alt="Logo Coffzin" class="logo">
     <nav>
         <ul class="menu">
@@ -18,39 +20,36 @@
         </ul>
     </nav>
 </header>
+
 <main>
     <h1>Our Products</h1>
     <div class="container"></div>
+
+    <!-- OVERLAY -->
+    <div class="cartOverlay" id="cartOverlay"></div>
+
     <!-- CARRINHO -->
-    <div class="shopCart">
-        <button id="closeShopCart">✕</button>
-        <h2>Your cart</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Qty</th>
-                    <th>Price</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody></tbody>
-            <tfoot>
-                <tr>
-                    <td colspan="4" id="total">Total: R$ 0.00</td>
-                </tr>
-            </tfoot>
-        </table>
+    <div class="shopCart" id="shopCart">
+        <div class="cartHeader">
+            <h2>Your cart</h2>
+            <button id="closeShopCart">✕</button>
+        </div>
+        <div class="cartItems" id="cartItems"></div>
+        <div class="cartFooter">
+            <div id="total">Total <span>R$ 0.00</span></div>
+            <button class="checkoutBtn" onclick="finalizePurchase()">Finalizar compra</button>
+        </div>
     </div>
-      <button id="openCart" class="cartBtn">
+
+    <!-- BOTÃO ABRIR CARRINHO -->
+    <button id="openCart" class="cartBtn">
         <i data-lucide="shopping-cart"></i>
         <span id="cartCount">0</span>
     </button>
 </main>
+
 <script src="https://unpkg.com/lucide@latest"></script>
 <script src="../script/pages/product.js"></script>
-<script>
-    lucide.createIcons();
-</script>
+<script>lucide.createIcons();</script>
 </body>
 </html>

@@ -1,112 +1,132 @@
-main { 
-    display: flex;
-    flex-direction: column;
+/* =======================================
+   COFFZIN — home.css
+   Usar com: global.css + glider.min.css
+   ======================================= */
+
+main {
+  display: flex;
+  flex-direction: column;
 }
 
-/* =============== SECTION PRINCIPAL ============= */
+/* ─── SECTION PRINCIPAL ─── */
 .mainSection {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    padding-top: 80px;   
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 70vh;
+  gap: 32px;
+  text-align: center;
+  padding: 40px 20px;
 }
 
-/* Botão de ler mais */
+.mainSection h1 {
+  font-size: clamp(32px, 5vw, 56px);
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
 #readMore {
-    width: 40%;
-    height: 100px;
-    font-size: 1.5rem;
-    font-weight: 600;
-    letter-spacing: 1px;
-    color: rgb(0, 0, 0);
-    background: linear-gradient(135deg, #ffffff, #fefefe);
-    border: none;
-    border-radius: 16px;
-    cursor: pointer;
-    transition: all 0.3s ease;
+  width: 220px;
+  height: 60px;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--brown-dark);
+  background: #fff;
+  border: 2px solid var(--brown-dark);
+  border-radius: 8px;
+  transition: all 0.3s ease;
 }
 
 #readMore:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 28px rgba(138, 82, 14, 0.35);
+  background-color: var(--brown-dark);
+  color: #fff;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(87, 47, 47, 0.25);
 }
 
-#readMore:active {
-    transform: translateY(0);
-    box-shadow: 0 6px 16px rgba(138, 82, 14, 0.25);
-}
-
-
-/* H1 (sem mudar conteúdo) */
-h1 { 
-    font-size: 50px;
-}
-
-/* =================== SECTION DE PRODUTOS ======================== */
+/* ─── SECTION CARROSSEL ─── */
 .productsSection {
-    margin-top: 150px;
-    width: 100%;
-    height: 500px;
-    background-color:  rgb(87, 47, 47);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  width: 100%;
+  min-height: 500px;
+  background-color: var(--brown-dark);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
 }
 
-/* Container dos cards */
 .glider-contain {
-    text-align: center;
-  max-width: 1000px;
-  margin: 40px auto 0;
+  text-align: center;
+  max-width: 900px;
+  width: 100%;
+  margin: 0 auto;
 }
 
-/* Cards */
 .card {
-  background: #1f1f1f;
-  padding: 50px 30px;
+  background: #ffffff;
+  padding: 48px 28px;
   border-radius: 12px;
   min-height: 220px;
-   margin: 0 5px
+  margin: 0 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
 }
 
-.card span {
-  font-size: 2.5rem;
-}
-
-/* Ícones em cada card */
 .card i {
-  width: 42px;
-  height: 42px;
-  margin-bottom: 16px;
-  background-color: #cfa35a;
-  color: red;
+  width: 40px;
+  height: 40px;
+  color: var(--brown-light);
+  stroke: var(--brown-light);
 }
 
-.buy { 
-    margin-top: 60px;
-    padding: 15px 30px;
-    font-size: 1.6rem;
-    font-weight: 600;
-    color: #ffffff;
-   background-color:  rgb(87, 47, 47);
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.3s ease;
+.card h3 {
+  color: #fff;
+  font-size: 1.1rem;
+}
+
+.card p {
+  color: #aaa;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+/* Botões do glider */
+.glider-prev,
+.glider-next {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 1.5rem;
+  margin-top: 16px;
+}
+
+.buy {
+  margin-top: 40px;
+  padding: 14px 40px;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #fff;
+  background-color: transparent;
+  border: 2px solid #fff;
+  border-radius: 6px;
+  transition: all 0.3s ease;
 }
 
 .buy:hover {
-    background-color: #cfa35a;
-    transform: translateY(-4px);
-    box-shadow: 0 12px 28px rgba(138, 82, 14, 0.35);
+  background-color: var(--brown-light);
+  border-color: var(--brown-light);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(207, 163, 90, 0.35);
 }
 
-/* ============= FOOTER ================ */
+/* ─── FOOTER ─── */
 footer {
-    background-color: rgb(87, 47, 47);
-    color: #fffffe;
-    text-align: center;
-    padding: 20px 0;
-    margin-top: 50px;
+  margin-top: 0;
 }

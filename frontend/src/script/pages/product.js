@@ -1,41 +1,21 @@
 let cart = [];
 
-// Carrega produtos
+// ─── CARREGA PRODUTOS ───
 async function loadProductData() {
     const response = await fetch('../script/data/product.json');
     return await response.json();
 }
 
-function limitProducts() {
-    if (cart.length >= 5) {
-        alert("You can't add more than 5 products to the cart.");
-        return false;
-    }
-    return true;
-}
-
-function isCartEmpty(showAlert = true) {
-    const empty = cart.length === 0;
-
-    if (empty && showAlert) {
-        alert("Your cart is empty!");
-    }
-
-    return empty;
-}
-
-
-// Renderiza produtos
+// ─── RENDERIZA PRODUTOS ───
 async function renderProducts() {
     const container = document.querySelector('.container');
     const products = await loadProductData();
-
     container.innerHTML = '';
 
     products.forEach((product, index) => {
         container.innerHTML += `
             <div class="card">
-                <img src="${product.img}">
+                <img src="${product.img}" alt="${product.name}">
                 <h3>${product.name}</h3>
                 <p>${product.desc}</p>
                 <strong>R$ ${product.price.toFixed(2)}</strong>
@@ -43,79 +23,87 @@ async function renderProducts() {
             </div>
         `;
     });
+
     window.products = products;
 }
 
-// Abrir / fechar carrinho
+// ─── ABRIR / FECHAR CARRINHO ───
 document.getElementById("openCart").addEventListener("click", () => {
-    document.querySelector(".shopCart").style.display = "flex";
+    document.getElementById("shopCart").classList.add("open");
+    document.getElementById("cartOverlay").style.display = "block";
 });
 
-document.getElementById("closeShopCart").addEventListener("click", () => {
-    document.querySelector(".shopCart").style.display = "none";
-});
+function closeCart() {
+    document.getElementById("shopCart").classList.remove("open");
+    document.getElementById("cartOverlay").style.display = "none";
+}
 
-// Adicionar produto
+document.getElementById("closeShopCart").addEventListener("click", closeCart);
+document.getElementById("cartOverlay").addEventListener("click", closeCart);
+
+// ─── ADICIONAR PRODUTO ───
 function addToCart(index) {
-    if (!limitProducts()) return;
+    if (cart.length >= 5) {
+        alert("You can't add more than 5 products to the cart.");
+        return;
+    }
     cart.push(products[index]);
     updateCart();
 }
 
-// Remover produto
+// ─── REMOVER PRODUTO ───
 function removeFromCart(index) {
     cart.splice(index, 1);
     updateCart();
 }
 
-// Finalizar compra
+// ─── FINALIZAR COMPRA ───
 function finalizePurchase() {
-    if (isCartEmpty()) return;
-
+    if (cart.length === 0) {
+        alert("Your cart is empty!");
+        return;
+    }
     alert("Purchase completed successfully!");
     cart = [];
     updateCart();
+    closeCart();
 }
 
-
-// Atualiza carrinho
+// ─── ATUALIZA CARRINHO ───
 function updateCart() {
-    const tbody = document.querySelector(".shopCart tbody");
+    const cartItems = document.getElementById("cartItems");
     const total = document.getElementById("total");
     const count = document.getElementById("cartCount");
 
-    tbody.innerHTML = '';
+    cartItems.innerHTML = '';
     let sum = 0;
 
-    cart.forEach((product, index) => {
-        sum += product.price;
-
-        tbody.innerHTML += `
-            <tr>
-                <td>${product.name}</td>
-                <td>1</td>
-                <td>R$ ${product.price.toFixed(2)}</td>
-                <td>
-                    <button onclick="removeFromCart(${index})">✕</button>
-                </td> 
-           ${
-                    index === 0
-                        ? `
-                <td rowspan="${cart.length}">
-                    <button class="checkoutBtn" onclick="finalizePurchase()">
-                        Finalizar
-                    </button>
-                </td>
-                `
-                        : ''
-                }
-            </tr>
+    if (cart.length === 0) {
+        cartItems.innerHTML = `
+            <div style="text-align:center; color:rgba(255,255,255,0.3); margin-top: 60px;">
+                <p style="font-size:2rem;">☕</p>
+                <p style="margin-top:12px; font-size:0.9rem;">Your cart is empty</p>
+            </div>
         `;
-    });
+    } else {
+        cart.forEach((product, index) => {
+            sum += product.price;
+            cartItems.innerHTML += `
+                <div class="cartItem">
+                    <div class="cartItemInfo">
+                        <div class="cartItemName">${product.name}</div>
+                        <div class="cartItemQty">Qty: 1</div>
+                    </div>
+                    <div class="cartItemPrice">R$ ${product.price.toFixed(2)}</div>
+                    <button class="cartRemoveBtn" onclick="removeFromCart(${index})">✕</button>
+                </div>
+            `;
+        });
+    }
 
-    total.innerText = `Total: R$ ${sum.toFixed(2)}`;
+    total.innerHTML = `Total <span>R$ ${sum.toFixed(2)}</span>`;
     count.innerText = cart.length;
 }
 
-// Inicializa
+// ─── INICIALIZA ───
 renderProducts();
