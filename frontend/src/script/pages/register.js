@@ -1,6 +1,6 @@
 import { formatDateToISO } from "../util/date.js";
 import { checkEmail, checkPassword } from "../util/validation.js";
-import { createUser } from "../services/userService.js";
+
 
 async function createAccount(event) {
     event.preventDefault();
