@@ -56,6 +56,7 @@ function removeFromCart(index) {
 
 // Esvaziar o carrinho 
 function emptyCart() {
+    if (cart.length === 0) return;
     cart = [];
     updateCart();
 }
