@@ -1,6 +1,6 @@
 import { formatDateToISO } from "../util/date.js";
 import { checkEmail, checkPassword } from "../util/validation.js";
-
+import { createUser } from "../services/userService.js";
 
 async function createAccount(event) {
     event.preventDefault();
@@ -9,7 +9,7 @@ async function createAccount(event) {
     const formData = new FormData(form);
 
     const email = formData.get("email");
-    const confirmEmail = formData.get("confirmedEmail");
+    const confirmEmail = formData.get("confirmEmail");
     const password = formData.get("password");
     const confirmPassword = formData.get("confirmPassword");
 
@@ -44,9 +44,9 @@ async function createAccount(event) {
     }
 }
 
-export function initRegisterPage() {
+document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("userForm");
     if (form) {
         form.addEventListener("submit", createAccount);
     }
-}
+});
