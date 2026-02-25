@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/style/global.css">
     <link rel="stylesheet" href="../assets/style/register.css">
     <link rel="shortcut icon" href="../assets/img/CoffzinLogo.png" type="image/x-icon">
     <title>COFFZIN</title>
@@ -10,7 +11,6 @@
 <body>
     <header>
         <img src="../assets/img/CoffzinLogo.png" alt="Logo do Coffzin" class="logo">
-        <img src="" alt="" class="UserLoginIcon">
         <nav>
             <ul class="menu">
                 <li><a href="home.html">Home</a></li>
@@ -21,45 +21,26 @@
         </nav>
     </header>
 
-   <div class="page-banner">
-    <img src="../assets/img/register/banner1.png" alt="Banner do criar conta">
-    <h1>Create an account</h1>
-</div>
+    <div class="page-banner">
+        <img src="../assets/img/register/banner1.png" alt="Banner do criar conta">
+        <h1>Create an account</h1>
+    </div>
 
     <div class="container">
-        <form id="userForm" class="container">
-
-            <!-- NOME -->
-            <input type="text" name="name" placeholder="Name*" required id="name">
-
-            <!-- SOBRENOME -->
-            <input type="text" name="lastName" placeholder="Last name*" required id="lastName">
-
-            <!-- DATA DE NASCIMENTO (formato yyyy-MM-dd automático) -->
-            <input type="date" name="birthDate" required id="data">
-
-            <!-- CPF -->
-            <input type="text" name="cpf" placeholder="CPF*" required id="cpf">
-
-            <!-- TELEFONE -->
-            <input type="text" name="phoneNumber" placeholder="Phone number*" required id="phoneNumber">
-
-            <!-- EMAIL -->
-            <input id="email" type="email" name="email" placeholder="Email*" required id ="email">
-
-            <!-- CONFIRMAR EMAIL -->
-            <input id="confirmedEmail" type="email" name="confirmEmail" placeholder="Confirm Email*" required>
-
-            <!-- SENHA -->
-            <input type="password" name="password" placeholder="Password*" required id="password">
-
-            <!-- CONFIRMAR SENHA -->
+        <form id="userForm" method="POST">
+            <input type="text" name="name" placeholder="Name*" required>
+            <input type="text" name="lastName" placeholder="Last name*" required>
+            <input type="date" name="birthDate" required>
+            <input type="text" name="cpf" placeholder="CPF*" required>
+            <input type="text" name="phoneNumber" placeholder="Phone number*">
+            <input type="email" name="email" placeholder="Email*" required>
+            <input type="email" name="confirmEmail" placeholder="Confirm Email*" required>
+            <input type="password" name="password" placeholder="Password*" required>
             <input type="password" name="confirmPassword" placeholder="Confirm Password*" required>
-
-            <!-- ✅ -->
             <button type="submit">CREATE ACCOUNT</button>
+        </form>
     </div>
+
     <script type="module" src="../script/pages/register.js"></script>
-    
 </body>
 </html>

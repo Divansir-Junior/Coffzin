@@ -1,8 +1,8 @@
 import { formatDateToISO } from "../util/date.js";
 import { checkEmail, checkPassword } from "../util/validation.js";
-import { createUser } from "../services/userService.js";
+import { createUser } from "../services/userService.js"; // ← vem daqui
 
-async function createAccount(event) {
+export async function createAccount(event) {
     event.preventDefault();
 
     const form = document.getElementById("userForm");
@@ -17,7 +17,6 @@ async function createAccount(event) {
     if (!checkPassword(password, confirmPassword)) return;
 
     let birthDateFormatted;
-
     try {
         birthDateFormatted = formatDateToISO(formData.get("birthDate"));
     } catch (error) {
