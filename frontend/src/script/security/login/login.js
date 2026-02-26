@@ -15,6 +15,7 @@ async function login() {
 
         if (response.ok) {
             alert(message);
+            window.location.href = "/index.html";
         } else {
             alert("Login failed: " + message); 
         }
