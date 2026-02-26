@@ -10,13 +10,13 @@
 <body>
     <div class="container">
         <h1>LOGIN</h1>
-        <form class="login-form">
-            <input type="text" placeholder=" Email" id="login">
+        <form class="login-form" onsubmit="return false;"> 
+            <input type="text" placeholder="Email" id="email"> <!-- ✅ id trocado de "login" para "email" -->
             <input type="password" placeholder="Password" id="pass">
+            <span class="forgetPass">Forget the password?</span>
+            <button type="button" onclick="handleLogin()">ENTER</button> <!-- ✅ função renomeada -->
+            <span>Dont have Account? <a href="frontend/src/pages/register.html">Create one</a></span>
         </form>
-       <span class="forgetPass">Forget the password ? </span>
-       <button onclick="login()">ENTER</button>
-        <span>Dont have Account? <a href="frontend/src/pages/register.html">Create one </a></span>
     </div>
     <script src="../script/security/login/login.js"></script>
 </body>

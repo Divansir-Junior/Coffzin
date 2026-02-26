@@ -5,6 +5,7 @@ import com.coffzin.dto.response.UserResponseDTO;
 import com.coffzin.model.User;
 import com.coffzin.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.List;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final BCryptPasswordEncoder passwordEncoder; // ✅ injetado
 
     public UserResponseDTO create(UserRequestDTO request) {
 
@@ -24,7 +26,7 @@ public class UserService {
         user.setBirthDate(request.getBirthDate());
         user.setPhoneNumber(request.getPhoneNumber());
         user.setEmail(request.getEmail());
-        user.setPassword(request.getPassword());
+        user.setPassword(passwordEncoder.encode(request.getPassword())); // ✅ senha com hash
 
         return UserResponseDTO.fromEntity(userRepository.save(user));
     }
@@ -67,7 +69,7 @@ public class UserService {
     }
 
     public void deleteById(Long id) {
-            if (id == null) {
+        if (id == null) {
             throw new RuntimeException("User id cannot be null");
         }
         if (!userRepository.existsById(id)) {

@@ -6,21 +6,25 @@ import org.springframework.web.bind.annotation.*;
 import com.coffzin.dto.request.LoginRequestDTO;
 import com.coffzin.service.AuthService;
 
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("api/auth")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "*")
 public class AuthController {
 
     private final AuthService authService;
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody LoginRequestDTO request) {
+    public ResponseEntity<String> login(@RequestBody LoginRequestDTO request, HttpServletResponse response) {
         try {
-            String message = authService.login(request);
-            return ResponseEntity.ok(message);
+            String token = authService.login(request);
+
+            response.setHeader("Set-Cookie",
+                "token=" + token + "; Path=/; HttpOnly; Max-Age=86400; SameSite=None");
+
+            return ResponseEntity.ok("Login realizado com sucesso");
         } catch (RuntimeException e) {
             return ResponseEntity.status(401).body(e.getMessage());
         }

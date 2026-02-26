@@ -1,5 +1,5 @@
-async function login() {
-    const email = document.getElementById("login").value;
+async function handleLogin() {
+    const email = document.getElementById("email").value; // ✅ id atualizado
     const password = document.getElementById("pass").value;
 
     try {
@@ -8,16 +8,16 @@ async function login() {
             headers: {
                 "Content-Type": "application/json"
             },
+            credentials: "include",
             body: JSON.stringify({ email, password })
         });
 
         const message = await response.text();
 
         if (response.ok) {
-            alert(message);
             window.location.href = "/index.html";
         } else {
-            alert("Login failed: " + message); 
+            alert("Login failed: " + message);
         }
 
     } catch (error) {
