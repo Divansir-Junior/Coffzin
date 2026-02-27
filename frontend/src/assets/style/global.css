@@ -80,15 +80,12 @@ header .menu-icon {
 }
 
 /* Foto do usuário */
-.bbb img {
-    width: 64px;
-    height: 64px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid var(--brown-light);
-    background-color: var(--brown-mid);
+.bbb .user-icon {
+    width: 48px;
+    height: 48px;
+    color: var(--brown-light);
+    stroke-width: 1.5;
 }
-
 /* Nome do usuário */
 .bbb h1 {
     font-size: 15px;
