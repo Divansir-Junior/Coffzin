@@ -7,6 +7,7 @@
 }
 
 :root {
+  --red-dark : rgb(128, 7, 7);
   --brown-dark:  rgb(87, 47, 47);
   --brown-mid:   rgb(117, 77, 77);
   --brown-light: #cfa35a;
@@ -45,6 +46,89 @@ header .menu-icon {
   cursor: pointer;
 }
 
+.bbb {
+    display: none;
+}
+
+/* ======================================= DROPDOWN MENU (bbb) ======================================= */
+.bbb {
+    display: none;
+}
+
+.bbb.open {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+
+    position: absolute;
+    top: 90px;
+    right: 0;
+    z-index: 999;
+
+    width: 220px;
+    padding: 24px 16px;
+
+    background: rgba(87, 47, 47, 0.97);
+    backdrop-filter: blur(10px);
+    border-left: 1px solid rgba(207, 163, 90, 0.3);
+    border-bottom: 1px solid rgba(207, 163, 90, 0.3);
+    border-radius: 0 0 0 12px;
+
+    box-shadow: -4px 8px 24px rgba(0, 0, 0, 0.3);
+    animation: slideIn 0.25s ease;
+}
+
+/* Foto do usuário */
+.bbb img {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--brown-light);
+    background-color: var(--brown-mid);
+}
+
+/* Nome do usuário */
+.bbb h1 {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--cream);
+    letter-spacing: 0.3px;
+}
+
+/* Botão de logout */
+.bbb button {
+    width: 100%;
+    padding: 10px;
+    background: transparent;
+    border: 1px solid rgba(207, 163, 90, 0.5);
+    border-radius: 6px;
+    color: var(--brown-light);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: all 0.2s ease;
+}
+
+.bbb button:hover {
+    background-color: var(--red-dark);
+    color: var(--cream);
+    border-color: var(--cream);
+}
+
+/* Animação de entrada */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 /* Cada linha do menu hamburguer */
 header .line {
   width: 25px;
