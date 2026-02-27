@@ -20,13 +20,18 @@ export function OpenMenu() {
 async function getCurrentUser() {
     try {
         const response = await fetch("http://localhost:8080/api/users/me", {
-            credentials: "include" 
+            credentials: "include"
         });
 
+        console.log("Status:", response.status); 
+        
         if (response.ok) return response.json();
+        
+        console.log("Erro:", await response.text()); 
         return null;
     } catch (error) {
         console.error("Error fetching user:", error);
         return null;
     }
 }
+

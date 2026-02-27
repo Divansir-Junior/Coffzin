@@ -1,6 +1,5 @@
 package com.coffzin.controller;
 
-import org.apache.coyote.Response;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
@@ -9,8 +8,9 @@ import org.springframework.web.bind.annotation.*;
 import com.coffzin.dto.request.LoginRequestDTO;
 import com.coffzin.service.AuthService;
 
-import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+
+import java.time.Duration;
 
 @RestController
 @RequestMapping("api/auth")
@@ -20,31 +20,39 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody LoginRequestDTO request, HttpServletResponse response) {
+    public ResponseEntity<String> login(@RequestBody LoginRequestDTO request) {
         try {
             String token = authService.login(request);
 
-            response.setHeader("Set-Cookie",
-                "token=" + token + "; Path=/; HttpOnly; Max-Age=86400; SameSite=None");
+            ResponseCookie cookie = ResponseCookie.from("token", token)
+                    .httpOnly(true)
+                    .secure(false)     
+                    .path("/")
+                    .maxAge(Duration.ofDays(1))
+                    .sameSite("Lax")    
+                    .build();
 
-            return ResponseEntity.ok("Login realizado com sucesso");
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.SET_COOKIE, cookie.toString())
+                    .body("Login realizado com sucesso");
+
         } catch (RuntimeException e) {
-            return ResponseEntity.status(401).body(e.getMessage());
+            return ResponseEntity.status(401).body("Credenciais inválidas");
         }
     }
 
-   @PostMapping("/logout")
-public ResponseEntity<String> logout(HttpServletResponse response) {
-    ResponseCookie cookie = ResponseCookie.from("token", "")
-            .httpOnly(true)
-            .secure(true)
-            .path("/")
-            .maxAge(0)
-            .sameSite("Strict")
-            .build();
+    @PostMapping("/logout")
+    public ResponseEntity<String> logout() {
+        ResponseCookie cookie = ResponseCookie.from("token", "")
+                .httpOnly(true)
+                .secure(false)
+                .path("/")
+                .maxAge(0)
+                .sameSite("Lax")
+                .build();
 
-    return ResponseEntity.ok()
-            .header(HttpHeaders.SET_COOKIE, cookie.toString())
-            .body("Logout realizado com sucesso");
-}
+        return ResponseEntity.ok()
+                .header(HttpHeaders.SET_COOKIE, cookie.toString())
+                .body("Logout realizado com sucesso");
+    }
 }

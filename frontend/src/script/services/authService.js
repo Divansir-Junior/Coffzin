@@ -1,4 +1,34 @@
- async function logout() {
+// ======================================= AUTH SERVICE =======================================
+
+export async function handleLogin() {
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("pass").value;
+
+    try {
+        const response = await fetch("http://localhost:8080/api/auth/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            credentials: "include",
+            body: JSON.stringify({ email, password })
+        });
+
+        const message = await response.text();
+
+        if (response.ok) {
+            window.location.href = "/index.html";
+        } else {
+            alert("Login failed: " + message);
+        }
+
+    } catch (error) {
+        console.error("Network error:", error);
+        alert("Unable to connect to the server.");
+    }
+}
+
+export async function logout() {
     try {
         const response = await fetch("http://localhost:8080/api/auth/logout", {
             method: "POST",
@@ -7,7 +37,7 @@
 
         if (response.ok) {
             alert("Logout...");
-            window.location.href = "/login.html"; 
+            window.location.href = "/login.html";
         }
     } catch (error) {
         console.log("Erro: " + error);
