@@ -1,10 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
-/* =======================================
-   COFFZIN — global.css
-   Importar em TODAS as páginas
-   ======================================= */
-
 * {
   margin: 0;
   padding: 0;
@@ -25,7 +20,7 @@ body {
   background-color: var(--cream);
 }
 
-/* ─── HEADER ─── */
+/* ======================================= HEADER ======================================= */
 header {
   width: 100%;
   height: 90px;
@@ -39,25 +34,36 @@ header {
   z-index: 100;
 }
 
+/* Div do menu hamburguer */
+header .menu-icon {
+  position: fixed;
+  right: 30px;
+  top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+}
+
+/* Cada linha do menu hamburguer */
+header .line {
+  width: 25px;
+  height: 3px;
+  background-color: #f9f8f8;
+}
+
+header .line:hover { 
+  background-color: #cfa35a;
+}
+/* Logo do header */
 .logo {
   width: 70px;
   height: 70px;
   object-fit: contain;
 }
 
-.LogoutIcon,
-.UserLoginIcon {
-  border-radius: 50%;
-  width: 46px;
-  height: 46px;
-  object-fit: cover;
-  background-color: var(--brown-mid);
-  position: absolute;
-  right: 50px;
-  cursor: pointer;
-}
 
-/* ─── MENU ─── */
+/* ======================================= MENU DE NAVEGAÇÃO ======================================= */
 .menu {
   display: flex;
   list-style: none;
@@ -65,6 +71,7 @@ header {
   gap: 24px;
 }
 
+/* Links do menu */
 .menu li a {
   text-decoration: none;
   color: #fff;
@@ -75,11 +82,12 @@ header {
   transition: background-color 0.3s;
 }
 
+/* Hover dos links do menu */
 .menu li a:hover {
   background-color: var(--brown-mid);
 }
 
-/* ─── FOOTER ─── */
+/* ======================================= FOOTER ======================================= */
 footer {
   background-color: var(--brown-dark);
   color: #fffffe;
@@ -88,6 +96,6 @@ footer {
   margin-top: 50px;
 }
 
-/* ─── UTILITÁRIOS ─── */
+/* ======================================= UTILITÁRIOS ======================================= */
 button { cursor: pointer; font-family: 'Poppins', sans-serif; }
 button:focus, button:active { outline: none; }
