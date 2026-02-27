@@ -7,6 +7,7 @@ export async function createUser(data) {
 
     if (!response.ok) {
         throw new Error(await response.text());
+        window.location.href = "/index.html"
     }
 
     return response.json();

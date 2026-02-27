@@ -1,8 +1,9 @@
 async function handleLogin() {
-    const email = document.getElementById("email").value; 
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("pass").value; // ← adicione isso
 
     try {
-      const response = await fetch("http://localhost:8080/api/auth/login", {
+        const response = await fetch("http://localhost:8080/api/auth/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
