@@ -15,10 +15,20 @@ import java.util.List;
 public class UserService {
 
     private final UserRepository userRepository;
-    private final BCryptPasswordEncoder passwordEncoder; // ✅ injetado
+    private final BCryptPasswordEncoder passwordEncoder;
 
     public UserResponseDTO create(UserRequestDTO request) {
 
+
+        if (userRepository.existsByCpf(request.getCpf())) {
+            throw new RuntimeException("CPF já cadastrado");
+        }
+
+        if (userRepository.existsByEmail(request.getEmail())) {
+            throw new RuntimeException("Email já cadastrado");
+        }
+
+        
         User user = new User();
         user.setName(request.getName());
         user.setLastName(request.getLastName());
@@ -26,7 +36,7 @@ public class UserService {
         user.setBirthDate(request.getBirthDate());
         user.setPhoneNumber(request.getPhoneNumber());
         user.setEmail(request.getEmail());
-        user.setPassword(passwordEncoder.encode(request.getPassword())); // ✅ senha com hash
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
 
         return UserResponseDTO.fromEntity(userRepository.save(user));
     }

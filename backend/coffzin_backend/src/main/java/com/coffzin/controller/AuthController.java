@@ -1,5 +1,8 @@
 package com.coffzin.controller;
 
+import org.apache.coyote.Response;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,4 +32,19 @@ public class AuthController {
             return ResponseEntity.status(401).body(e.getMessage());
         }
     }
+
+   @PostMapping("/logout")
+public ResponseEntity<String> logout(HttpServletResponse response) {
+    ResponseCookie cookie = ResponseCookie.from("token", "")
+            .httpOnly(true)
+            .secure(true)
+            .path("/")
+            .maxAge(0)
+            .sameSite("Strict")
+            .build();
+
+    return ResponseEntity.ok()
+            .header(HttpHeaders.SET_COOKIE, cookie.toString())
+            .body("Logout realizado com sucesso");
+}
 }
