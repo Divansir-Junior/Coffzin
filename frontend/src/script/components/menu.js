@@ -1,3 +1,4 @@
+import { logout } from "../services/authService.js";
 const menuBtn = document.getElementById("menu");
 const menu = document.querySelector(".bbb");
 const userName = document.getElementById("name");
@@ -5,6 +6,7 @@ const userName = document.getElementById("name");
 export function OpenMenu() {
     menuBtn.addEventListener("click", async () => {
         menu.classList.toggle("open");
+        document.querySelector(".bbb button").addEventListener("click", logout);
 
         // Busca o usuário só uma vez
         if (!userName.dataset.loaded) {

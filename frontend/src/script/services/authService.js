@@ -37,7 +37,7 @@ export async function logout() {
 
         if (response.ok) {
             alert("Logout...");
-            window.location.href = "/login.html";
+            window.location.href = "http://localhost:5501/frontend/src/pages/login.html";
         }
     } catch (error) {
         console.log("Erro: " + error);
