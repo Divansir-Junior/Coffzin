@@ -18,17 +18,18 @@ public class AuthService {
     private final BCryptPasswordEncoder passwordEncoder;
 
     public String login(LoginRequestDTO request) {
-        // ✅ Busca o usuário normalmente
+        
         User user = userRepository.findByEmail(request.email())
                 .orElseThrow(() -> new RuntimeException("Credenciais inválidas"));
-                // ✅ Mensagem genérica — não confirma se o email existe (evita enumeração de usuários)
+                
 
-        // ✅ Compara senha com hash BCrypt
+        
         if (!passwordEncoder.matches(request.password(), user.getPassword())) {
             throw new RuntimeException("Credenciais inválidas");
-            // ✅ Mesma mensagem para email errado e senha errada — comportamento seguro
+        
         }
 
         return jwtService.generateToken(user.getEmail());
     }
+    
 }
