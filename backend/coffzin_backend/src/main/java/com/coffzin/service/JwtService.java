@@ -16,10 +16,14 @@ public class JwtService {
     @Value("${jwt.secret}")
     private String secret;
 
-    private final long EXPIRATION = 1000L * 60 * 60 * 24; // 1 dia
+    @Value("${jwt.expiration:86400000}")
+    private long expiration;
 
-    
     private SecretKey getSecretKey() {
+        if (secret == null || secret.getBytes(StandardCharsets.UTF_8).length < 32) {
+            throw new IllegalStateException("JWT secret must contain at least 32 bytes");
+        }
+
         return Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
     }
 
@@ -27,7 +31,7 @@ public class JwtService {
         return Jwts.builder()
                 .subject(email)
                 .issuedAt(new Date())
-                .expiration(new Date(System.currentTimeMillis() + EXPIRATION))
+                .expiration(new Date(System.currentTimeMillis() + expiration))
                 .signWith(getSecretKey())
                 .compact();
     }
@@ -41,7 +45,6 @@ public class JwtService {
                 .getSubject();
     }
 
-  
     public boolean isTokenValid(String token) {
         try {
             extractEmail(token);

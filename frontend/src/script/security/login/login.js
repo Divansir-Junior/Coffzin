@@ -1,27 +1,19 @@
-async function handleLogin() {
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("pass").value; // ← adicione isso
+import { login } from "../../services/authService.js";
 
-    try {
-        const response = await fetch("http://localhost:8080/api/auth/login", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            credentials: "include",
-            body: JSON.stringify({ email, password })
-        });
+document.addEventListener("DOMContentLoaded", () => {
+    const form = document.querySelector(".login-form");
 
-        const message = await response.text();
+    form?.addEventListener("submit", async (event) => {
+        event.preventDefault();
 
-        if (response.ok) {
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("pass").value;
+
+        try {
+            await login(email, password);
             window.location.href = "/index.html";
-        } else {
-            alert("Login failed: " + message);
+        } catch (error) {
+            alert(error.message);
         }
-
-    } catch (error) {
-        console.error("Network error:", error);
-        alert("Unable to connect to the server.");
-    }
-}
+    });
+});

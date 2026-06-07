@@ -1,26 +1,17 @@
-// Função para redirecionar para as páginas 
 export function redirectToPages() {
   const btnOurProducts = document.getElementById("prodtBtn");
   const btnAboutUs = document.getElementById("contactBtn");
   const btnBuyNow = document.getElementById("buyBtn");
-  
-  if (btnAboutUs) {
-    btnAboutUs.addEventListener("click", () => {
-      window.location.href = "frontend/src/pages/about.html";
-    });
-  }
 
-  if (btnOurProducts) {
-    btnOurProducts.addEventListener("click", () => {
-      window.location.href = "frontend/src/pages/products.html";
-    });
-  }
+  btnAboutUs?.addEventListener("click", () => {
+    window.location.href = "frontend/src/pages/about.html";
+  });
 
-  if (btnBuyNow) {
-    btnBuyNow.addEventListener("click", () => {
-      window.location.href = "frontend/src/pages/products.html";
-    });
-  }
+  btnOurProducts?.addEventListener("click", () => {
+    window.location.href = "frontend/src/pages/products.html";
+  });
+
+  btnBuyNow?.addEventListener("click", () => {
+    window.location.href = "frontend/src/pages/products.html";
+  });
 }
-
-redirectToPages();

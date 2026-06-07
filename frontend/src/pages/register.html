@@ -13,7 +13,7 @@
         <img src="../assets/img/CoffzinLogo.png" alt="Logo do Coffzin" class="logo">
         <nav>
             <ul class="menu">
-                <li><a href="home.html">Home</a></li>
+                <li><a href="../../../index.html">Home</a></li>
                 <li><a href="about.html">About us</a></li>
                 <li><a href="products.html">Product</a></li>
                 <li><a href="contact.html">Contact us</a></li>
@@ -31,11 +31,11 @@
             <input type="text" name="name" placeholder="Name*" required>
             <input type="text" name="lastName" placeholder="Last name*" required>
             <input type="date" name="birthDate" required>
-            <input type="text" name="cpf" placeholder="CPF*" required>
-            <input type="text" name="phoneNumber" placeholder="Phone number*">
+            <input type="text" name="cpf" placeholder="CPF*" inputmode="numeric" minlength="11" maxlength="14" required>
+            <input type="text" name="phoneNumber" placeholder="Phone number" inputmode="numeric" minlength="10" maxlength="15">
             <input type="email" name="email" placeholder="Email*" required>
             <input type="email" name="confirmEmail" placeholder="Confirm Email*" required>
-            <input type="password" name="password" placeholder="Password*" required>
+            <input type="password" name="password" placeholder="Password*" minlength="8" required>
             <input type="password" name="confirmPassword" placeholder="Confirm Password*" required>
             <button type="submit">CREATE ACCOUNT</button>
         </form>

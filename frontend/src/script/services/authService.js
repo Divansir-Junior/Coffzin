@@ -1,45 +1,37 @@
-// ======================================= AUTH SERVICE =======================================
+import { API_BASE_URL, getErrorMessage, parseResponse } from "./api.js";
 
-export async function handleLogin() {
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("pass").value;
+export async function login(email, password) {
+    const response = await fetch(`${API_BASE_URL}/auth/login`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        credentials: "include",
+        body: JSON.stringify({
+            email: email.trim(),
+            password
+        })
+    });
 
-    try {
-        const response = await fetch("http://localhost:8080/api/auth/login", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            credentials: "include",
-            body: JSON.stringify({ email, password })
-        });
+    const payload = await parseResponse(response);
 
-        const message = await response.text();
-
-        if (response.ok) {
-            window.location.href = "/index.html";
-        } else {
-            alert("Login failed: " + message);
-        }
-
-    } catch (error) {
-        console.error("Network error:", error);
-        alert("Unable to connect to the server.");
+    if (!response.ok) {
+        throw new Error(getErrorMessage(payload, "Invalid email or password"));
     }
+
+    return payload;
 }
 
 export async function logout() {
-    try {
-        const response = await fetch("http://localhost:8080/api/auth/logout", {
-            method: "POST",
-            credentials: "include"
-        });
+    const response = await fetch(`${API_BASE_URL}/auth/logout`, {
+        method: "POST",
+        credentials: "include"
+    });
 
-        if (response.ok) {
-            alert("Logout...");
-            window.location.href = "http://localhost:5501/frontend/src/pages/login.html";
-        }
-    } catch (error) {
-        console.log("Erro: " + error);
+    if (!response.ok) {
+        const payload = await parseResponse(response);
+        throw new Error(getErrorMessage(payload, "Unable to logout"));
     }
+
+    window.location.href = "/frontend/src/pages/login.html";
 }

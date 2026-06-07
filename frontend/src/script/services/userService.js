@@ -1,34 +1,36 @@
-// ======================================= USER SERVICE =======================================
+import { API_BASE_URL, getErrorMessage, parseResponse } from "./api.js";
 
 export async function createUser(data) {
-    const response = await fetch("http://localhost:8080/api/users", {
+    const response = await fetch(`${API_BASE_URL}/users`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify(data)
     });
 
+    const payload = await parseResponse(response);
+
     if (!response.ok) {
-        throw new Error(await response.text());
-        window.location.href = "/index.html"
+        throw new Error(getErrorMessage(payload, "Unable to create account"));
     }
 
-    return response.json();
+    return payload;
 }
 
 export async function getCurrentUser() {
-    try {
-        const response = await fetch("http://localhost:8080/api/users/me", {
-            credentials: "include"
-        });
+    const response = await fetch(`${API_BASE_URL}/users/me`, {
+        credentials: "include"
+    });
 
-        console.log("Status /me:", response.status);
-
-        if (response.ok) return response.json();
-
-        console.log("Erro /me:", await response.text());
-        return null;
-    } catch (error) {
-        console.error("Error fetching user:", error);
+    if (response.status === 401) {
         return null;
     }
+
+    const payload = await parseResponse(response);
+
+    if (!response.ok) {
+        throw new Error(getErrorMessage(payload, "Unable to fetch current user"));
+    }
+
+    return payload;
 }

@@ -1,23 +1,26 @@
-package com.coffzin.backend.service; // Altere para o pacote real do seu teste (ex: com.coffzin.service)
-
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
-
-import java.time.LocalDate;
-import java.util.Optional;
-
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
+package com.coffzin.backend.service;
 
 import com.coffzin.dto.request.UserRequestDTO;
 import com.coffzin.dto.response.UserResponseDTO;
 import com.coffzin.model.User;
 import com.coffzin.repository.UserRepository;
 import com.coffzin.service.UserService;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import java.time.LocalDate;
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class UserServiceTest {
@@ -25,140 +28,91 @@ class UserServiceTest {
     @Mock
     private UserRepository userRepository;
 
+    @Mock
+    private BCryptPasswordEncoder passwordEncoder;
+
     @InjectMocks
     private UserService userService;
 
     @Test
     void createUser() {
-        
-        UserRequestDTO request = UserRequestDTO.builder()
-        .name("Test User")
-        .lastName("Sobrenome")
-        .cpf("212.231.212")
-        .birthDate(LocalDate.of(1990, 5, 15))
-        .phoneNumber("11987654321")
-        .email("testuser@example.com")
-        .password("bc3")
-        .build();
+        UserRequestDTO request = defaultRequest()
+                .email("TestUser@Example.com")
+                .password("abc12345")
+                .build();
 
-
-        // Cria a entidade que será retornada pelo mock do repositório
-        User savedUser = new User();
-        savedUser.setId(1L);
-        savedUser.setName("Test User");
-        savedUser.setLastName("Sobrenome");
+        User savedUser = defaultUser();
         savedUser.setEmail("testuser@example.com");
-        savedUser.setPassword("bc3");
-        savedUser.setBirthDate(LocalDate.of(1990, 5, 15));
-        savedUser.setCpf("212.231.212");
-        savedUser.setPhoneNumber("11987654321");
+        savedUser.setPassword("encoded-password");
 
-        // Configura o mock para retornar o usuário salvo
+        when(passwordEncoder.encode("abc12345")).thenReturn("encoded-password");
         when(userRepository.save(any(User.class))).thenReturn(savedUser);
 
-        // When: chama o método real do service
         UserResponseDTO result = userService.create(request);
 
-        // Then: verifica o resultado e as interações
         assertNotNull(result);
         assertEquals(1L, result.getId());
         assertEquals("Test User", result.getName());
         assertEquals("testuser@example.com", result.getEmail());
         assertEquals(LocalDate.of(1990, 5, 15), result.getBirthDate());
-        assertEquals("212.231.212", result.getCpf());
+        assertEquals("12345678901", result.getCpf());
         assertEquals("11987654321", result.getPhoneNumber());
 
-        // Garante que o método save foi chamado exatamente uma vez
+        verify(passwordEncoder, times(1)).encode("abc12345");
         verify(userRepository, times(1)).save(any(User.class));
     }
 
-   @Test
+    @Test
     void getUserById() {
+        Long userId = 1L;
+        User user = defaultUser();
 
-    // Arrange
-    Long userId = 1L;
+        when(userRepository.findById(userId)).thenReturn(Optional.of(user));
 
-    User user = new User();
-    user.setId(userId);
-    user.setName("Test User");
-    user.setLastName("Sobrenome");
-    user.setCpf("212.231.212");
-    user.setBirthDate(LocalDate.of(1990, 5, 15));
-    user.setPhoneNumber("11987654321");
-    user.setEmail("testuser@example.com");
-    user.setPassword("bc3");
+        UserResponseDTO response = userService.getById(userId);
 
-    when(userRepository.findById(userId)).thenReturn(Optional.of(user));
+        assertNotNull(response);
+        assertEquals(userId, response.getId());
+        assertEquals("Test User", response.getName());
+        assertEquals("testuser@example.com", response.getEmail());
 
-    // Act
-    UserResponseDTO response = userService.getById(userId);
-
-    // Assert
-    assertNotNull(response);
-    assertEquals(userId, response.getId());
-    assertEquals("Test User", response.getName());
-    assertEquals("testuser@example.com", response.getEmail());
-
-    verify(userRepository, times(1)).findById(userId);
-}
+        verify(userRepository, times(1)).findById(userId);
+    }
 
     @Test
     void updateUser() {
+        Long userId = 1L;
+        UserRequestDTO request = defaultRequest()
+                .name("Updated User")
+                .email("updated@example.com")
+                .build();
 
-    // Arrange
-    Long userId = 1L;
+        User existingUser = defaultUser();
+        existingUser.setEmail("old@example.com");
 
-    UserRequestDTO request = UserRequestDTO.builder()
-            .name("Updated User")
-            .lastName("Sobrenome")
-            .cpf("212.231.212")
-            .birthDate(LocalDate.of(1990, 5, 15))
-            .phoneNumber("11987654321")
-            .email("updated@example.com")
-            .password("bc3")
-            .build();
+        User updatedUser = defaultUser();
+        updatedUser.setName("Updated User");
+        updatedUser.setEmail("updated@example.com");
 
-    User existingUser = new User();
-    existingUser.setId(userId);
-    existingUser.setName("Test User");
-    existingUser.setLastName("Sobrenome");
-    existingUser.setCpf("212.231.212");
-    existingUser.setBirthDate(LocalDate.of(1990, 5, 15));
-    existingUser.setPhoneNumber("11987654321");
-    existingUser.setEmail("old@example.com");
-    existingUser.setPassword("bc3");
+        when(userRepository.findById(userId)).thenReturn(Optional.of(existingUser));
+        when(userRepository.save(any(User.class))).thenReturn(updatedUser);
 
-    User updatedUser = new User();
-    updatedUser.setId(userId);
-    updatedUser.setName("Updated User");
-    updatedUser.setLastName("Sobrenome");
-    updatedUser.setCpf("212.231.212");
-    updatedUser.setBirthDate(LocalDate.of(1990, 5, 15));
-    updatedUser.setPhoneNumber("11987654321");
-    updatedUser.setEmail("updated@example.com");
-    updatedUser.setPassword("bc3");
+        UserResponseDTO response = userService.updateUser(userId, request);
 
-    when(userRepository.findById(userId)).thenReturn(Optional.of(existingUser));
-    when(userRepository.save(any(User.class))).thenReturn(updatedUser);
+        assertNotNull(response);
+        assertEquals(userId, response.getId());
+        assertEquals("Updated User", response.getName());
+        assertEquals("updated@example.com", response.getEmail());
 
-    // Act
-    UserResponseDTO response = userService.updateUser(userId, request);
-
-    // Assert
-    assertNotNull(response);
-    assertEquals(userId, response.getId());
-    assertEquals("Updated User", response.getName());
-    assertEquals("updated@example.com", response.getEmail());
-
-    verify(userRepository, times(1)).findById(userId);
-    verify(userRepository, times(1)).save(any(User.class));
-}
+        verify(userRepository, times(1)).findById(userId);
+        verify(userRepository, times(1)).save(any(User.class));
+    }
 
     @Test
     void deleteUser() {
         Long userId = 1L;
 
-        when(userRepository.existsById(userId)).thenReturn(true, false);
+        when(userRepository.existsById(userId)).thenReturn(true);
         userService.deleteById(userId);
 
         verify(userRepository, times(1)).existsById(userId);
@@ -168,22 +122,39 @@ class UserServiceTest {
     @Test
     void searchByEmail() {
         String email = "teste@gmail.com";
-
-        User user = new User();
-        user.setId(1L);
-        user.setName("Test User");
-        user.setLastName("Sobrenome");
-        user.setCpf("212.231.212");
-        user.setBirthDate(LocalDate.of(1990, 5, 15));
-        user.setPhoneNumber("11987654321");
+        User user = defaultUser();
         user.setEmail(email);
 
         when(userRepository.findByEmail(email)).thenReturn(Optional.of(user));
+
         UserResponseDTO response = userService.getByEmail(email);
+
         assertNotNull(response);
         assertEquals(email, response.getEmail());
         verify(userRepository, times(1)).findByEmail(email);
     }
 
+    private UserRequestDTO.UserRequestDTOBuilder defaultRequest() {
+        return UserRequestDTO.builder()
+                .name("Test User")
+                .lastName("Sobrenome")
+                .cpf("123.456.789-01")
+                .birthDate(LocalDate.of(1990, 5, 15))
+                .phoneNumber("(11) 98765-4321")
+                .email("testuser@example.com")
+                .password("abc12345");
+    }
 
+    private User defaultUser() {
+        User user = new User();
+        user.setId(1L);
+        user.setName("Test User");
+        user.setLastName("Sobrenome");
+        user.setCpf("12345678901");
+        user.setBirthDate(LocalDate.of(1990, 5, 15));
+        user.setPhoneNumber("11987654321");
+        user.setEmail("testuser@example.com");
+        user.setPassword("encoded-password");
+        return user;
+    }
 }

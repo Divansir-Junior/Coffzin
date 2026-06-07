@@ -1,39 +1,37 @@
 import { logout } from "../services/authService.js";
+import { getCurrentUser } from "../services/userService.js";
+
 const menuBtn = document.getElementById("menu");
 const menu = document.querySelector(".bbb");
 const userName = document.getElementById("name");
+const logoutBtn = document.getElementById("logoutBtn");
 
 export function OpenMenu() {
+    if (!menuBtn || !menu) return;
+
+    logoutBtn?.addEventListener("click", async () => {
+        try {
+            await logout();
+        } catch (error) {
+            alert(error.message);
+        }
+    });
+
     menuBtn.addEventListener("click", async () => {
         menu.classList.toggle("open");
-        document.querySelector(".bbb button").addEventListener("click", logout);
 
-        // Busca o usuário só uma vez
-        if (!userName.dataset.loaded) {
+        if (!userName || userName.dataset.loaded) return;
+
+        try {
             const user = await getCurrentUser();
             if (user) {
                 userName.innerText = "Hello, " + user.name;
                 userName.dataset.loaded = "true";
+            } else {
+                userName.innerText = "Hello, guest";
             }
+        } catch {
+            userName.innerText = "Hello, guest";
         }
     });
 }
-
-async function getCurrentUser() {
-    try {
-        const response = await fetch("http://localhost:8080/api/users/me", {
-            credentials: "include"
-        });
-
-        console.log("Status:", response.status); 
-        
-        if (response.ok) return response.json();
-        
-        console.log("Erro:", await response.text()); 
-        return null;
-    } catch (error) {
-        console.error("Error fetching user:", error);
-        return null;
-    }
-}
-
