@@ -1,111 +1,238 @@
-let cart = [];
+const CART_STORAGE_KEY = "coffzin.cart.v1";
 
-// ─── CARREGA PRODUTOS ───
-async function loadProductData() {
-    const response = await fetch('../script/data/product.json');
-    return await response.json();
+let products = [];
+let cart = loadCart();
+
+const productContainer = document.querySelector(".container");
+const cartDrawer = document.getElementById("shopCart");
+const cartOverlay = document.getElementById("cartOverlay");
+const cartItems = document.getElementById("cartItems");
+const cartTotal = document.getElementById("total");
+const cartCount = document.getElementById("cartCount");
+const checkoutBtn = document.getElementById("checkoutBtn");
+const emptyCartBtn = document.getElementById("emptyCartBtn");
+
+document.addEventListener("DOMContentLoaded", initProductsPage);
+
+async function initProductsPage() {
+    products = await loadProductData();
+    renderProducts();
+    bindCartEvents();
+    updateCart();
+
+    if (window.lucide) {
+        lucide.createIcons();
+    }
 }
 
-// ─── RENDERIZA PRODUTOS ───
-async function renderProducts() {
-    const container = document.querySelector('.container');
-    const products = await loadProductData();
-    container.innerHTML = '';
+async function loadProductData() {
+    const response = await fetch("../script/data/product.json");
 
-    products.forEach((product, index) => {
-        container.innerHTML += `
-            <div class="card">
-                <img src="${product.img}" alt="${product.name}">
-                <h3>${product.name}</h3>
-                <p>${product.desc}</p>
-                <strong>R$ ${product.price.toFixed(2)}</strong>
-                <button onclick="addToCart(${index})">Add to cart</button>
-            </div>
+    if (!response.ok) {
+        throw new Error("Unable to load products");
+    }
+
+    return response.json();
+}
+
+function renderProducts() {
+    productContainer.innerHTML = "";
+
+    products.forEach((product) => {
+        const card = document.createElement("article");
+        card.className = "card";
+
+        card.innerHTML = `
+            <img src="${product.img}" alt="${product.name}">
+            <h3>${product.name}</h3>
+            <p>${product.desc}</p>
+            <strong>${formatCurrency(product.price)}</strong>
+            <button type="button" class="addToCartBtn" data-product-id="${product.id}">
+                Add to cart
+            </button>
         `;
+
+        productContainer.appendChild(card);
+    });
+}
+
+function bindCartEvents() {
+    document.getElementById("openCart")?.addEventListener("click", openCart);
+    document.getElementById("closeShopCart")?.addEventListener("click", closeCart);
+    cartOverlay?.addEventListener("click", closeCart);
+    emptyCartBtn?.addEventListener("click", emptyCart);
+    checkoutBtn?.addEventListener("click", finalizePurchase);
+
+    productContainer?.addEventListener("click", (event) => {
+        const button = event.target.closest(".addToCartBtn");
+        if (!button) return;
+
+        addToCart(Number(button.dataset.productId));
     });
 
-    window.products = products;
+    cartItems?.addEventListener("click", (event) => {
+        const button = event.target.closest("[data-cart-action]");
+        if (!button) return;
+
+        const productId = Number(button.dataset.productId);
+        const action = button.dataset.cartAction;
+
+        if (action === "increase") increaseQuantity(productId);
+        if (action === "decrease") decreaseQuantity(productId);
+        if (action === "remove") removeFromCart(productId);
+    });
 }
 
-// ─── ABRIR / FECHAR CARRINHO ───
-document.getElementById("openCart").addEventListener("click", () => {
-    document.getElementById("shopCart").classList.add("open");
-    document.getElementById("cartOverlay").style.display = "block";
-});
+function openCart() {
+    cartDrawer.classList.add("open");
+    cartOverlay.classList.add("open");
+}
 
 function closeCart() {
-    document.getElementById("shopCart").classList.remove("open");
-    document.getElementById("cartOverlay").style.display = "none";
+    cartDrawer.classList.remove("open");
+    cartOverlay.classList.remove("open");
 }
 
-document.getElementById("closeShopCart").addEventListener("click", closeCart);
-document.getElementById("cartOverlay").addEventListener("click", closeCart);
+function addToCart(productId) {
+    const product = products.find((item) => item.id === productId);
+    if (!product) return;
 
-// ─── ADICIONAR PRODUTO ───
-function addToCart(index) {
-   
-    cart.push(products[index]);
+    const existingItem = cart.find((item) => item.id === product.id);
+
+    if (existingItem) {
+        existingItem.quantity += 1;
+    } else {
+        cart.push({
+            id: product.id,
+            name: product.name,
+            price: Number(product.price),
+            quantity: 1
+        });
+    }
+
+    saveCart();
+    updateCart();
+    openCart();
+}
+
+function increaseQuantity(productId) {
+    const item = cart.find((cartItem) => cartItem.id === productId);
+    if (!item) return;
+
+    item.quantity += 1;
+    saveCart();
     updateCart();
 }
 
-// ─── REMOVER PRODUTO ───
-function removeFromCart(index) {
-    cart.splice(index, 1);
+function decreaseQuantity(productId) {
+    const item = cart.find((cartItem) => cartItem.id === productId);
+    if (!item) return;
+
+    item.quantity -= 1;
+
+    if (item.quantity <= 0) {
+        removeFromCart(productId);
+        return;
+    }
+
+    saveCart();
     updateCart();
 }
 
-// Esvaziar o carrinho 
+function removeFromCart(productId) {
+    cart = cart.filter((item) => item.id !== productId);
+    saveCart();
+    updateCart();
+}
+
 function emptyCart() {
     if (cart.length === 0) return;
+
     cart = [];
+    saveCart();
     updateCart();
 }
-// ─── FINALIZAR COMPRA ───
+
 function finalizePurchase() {
     if (cart.length === 0) {
         alert("Your cart is empty!");
         return;
     }
+
     alert("Purchase completed successfully!");
     cart = [];
+    saveCart();
     updateCart();
     closeCart();
 }
 
-// ─── ATUALIZA CARRINHO ───
 function updateCart() {
-    const cartItems = document.getElementById("cartItems");
-    const total = document.getElementById("total");
-    const count = document.getElementById("cartCount");
+    cartItems.innerHTML = "";
 
-    cartItems.innerHTML = '';
-    let sum = 0;
+    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+    const totalPrice = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
     if (cart.length === 0) {
         cartItems.innerHTML = `
-            <div style="text-align:center; color:rgba(255,255,255,0.3); margin-top: 60px;">
-                <p style="font-size:2rem;">☕</p>
-                <p style="margin-top:12px; font-size:0.9rem;">Your cart is empty</p>
+            <div class="cartEmptyState">
+                <p class="cartEmptyIcon">Coffee</p>
+                <p>Your cart is empty</p>
             </div>
         `;
     } else {
-        cart.forEach((product, index) => {
-            sum += product.price;
-            cartItems.innerHTML += `
-                <div class="cartItem">
-                    <div class="cartItemInfo">
-                        <div class="cartItemName">${product.name}</div>
-                        <div class="cartItemQty">Qty: 1</div>
-                    </div>
-                    <div class="cartItemPrice">R$ ${product.price.toFixed(2)}</div>
-                    <button class="cartRemoveBtn" onclick="removeFromCart(${index})">✕</button>
+        cart.forEach((item) => {
+            const subtotal = item.price * item.quantity;
+            const cartItem = document.createElement("div");
+            cartItem.className = "cartItem";
+            cartItem.innerHTML = `
+                <div class="cartItemInfo">
+                    <div class="cartItemName">${item.name}</div>
+                    <div class="cartItemPrice">${formatCurrency(subtotal)}</div>
+                    <div class="cartItemMeta">${formatCurrency(item.price)} each</div>
                 </div>
+                <div class="cartQuantity">
+                    <button type="button" data-cart-action="decrease" data-product-id="${item.id}" aria-label="Decrease ${item.name} quantity">-</button>
+                    <span>${item.quantity}</span>
+                    <button type="button" data-cart-action="increase" data-product-id="${item.id}" aria-label="Increase ${item.name} quantity">+</button>
+                </div>
+                <button type="button" class="cartRemoveBtn" data-cart-action="remove" data-product-id="${item.id}" aria-label="Remove ${item.name}">
+                    x
+                </button>
             `;
+
+            cartItems.appendChild(cartItem);
         });
     }
 
-    total.innerHTML = `Total <span>R$ ${sum.toFixed(2)}</span>`;
-    count.innerText = cart.length;
+    cartTotal.innerHTML = `Total <span>${formatCurrency(totalPrice)}</span>`;
+    cartCount.innerText = totalItems;
+    cartCount.classList.toggle("isEmpty", totalItems === 0);
 }
-// ─── INICIALIZA ───
-renderProducts();
+
+function loadCart() {
+    try {
+        const storedCart = JSON.parse(localStorage.getItem(CART_STORAGE_KEY)) || [];
+
+        return storedCart
+            .filter((item) => item.id && item.name && Number(item.price) >= 0 && Number(item.quantity) > 0)
+            .map((item) => ({
+                id: Number(item.id),
+                name: item.name,
+                price: Number(item.price),
+                quantity: Number(item.quantity)
+            }));
+    } catch {
+        return [];
+    }
+}
+
+function saveCart() {
+    localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
+}
+
+function formatCurrency(value) {
+    return new Intl.NumberFormat("pt-BR", {
+        style: "currency",
+        currency: "BRL"
+    }).format(value);
+}
