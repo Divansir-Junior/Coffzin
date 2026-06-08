@@ -62,15 +62,10 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
 
-        config.setAllowedOrigins(List.of(
-            "http://localhost:5501",
-            "http://127.0.0.1:5501",
-            "http://192.168.1.9:5501",
-            "http://localhost:8080",
-            "http://127.0.0.1:8080",
-            "http://192.168.1.9:8080",
-            "http://localhost:3000",
-            "http://localhost:5173"
+        config.setAllowedOriginPatterns(List.of(
+            "http://localhost:*",
+            "http://127.0.0.1:*",
+            "http://192.168.*:*"
         ));
 
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
