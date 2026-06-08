@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.coffzin.dto.request.ProductRequestDTO;
 import com.coffzin.dto.response.ProductResponseDTO;
+import com.coffzin.exception.ResourceNotFoundException;
 import com.coffzin.model.Product;
 import com.coffzin.repository.ProductRepository;
 
@@ -31,12 +32,12 @@ public class ProductService {
     public ProductResponseDTO getProductById(Long id) { 
         return productRepository.findById(id).
                 map(ProductResponseDTO::fromEntity)
-                .orElseThrow(() -> new RuntimeException("Product not found with id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Product not found"));
     }
 
     public void deleteProduct (Long id) {
         if (!productRepository.existsById(id)) {
-            throw new RuntimeException("Product not found with id: " + id);
+            throw new ResourceNotFoundException("Product not found");
         }
 
         productRepository.deleteById(id);
@@ -44,7 +45,7 @@ public class ProductService {
 
     public ProductResponseDTO updateProduct (Long id, ProductRequestDTO request) {
         Product product = productRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Product not found with id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Product not found"));
 
         product.setName(request.getName());
         product.setDescription(request.getDescription());
@@ -95,10 +96,10 @@ public class ProductService {
    public void decreaseStock (Long id, int quantity) {
 
         Product product = productRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Product not found with id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Product not found"));
 
         if (product.getQuantity() < quantity) {
-            throw new RuntimeException("Not enough stock for product with id: " + id);
+            throw new IllegalArgumentException("Not enough stock for product");
         }
 
         product.setQuantity(product.getQuantity() - quantity);
@@ -108,7 +109,7 @@ public class ProductService {
 
    public void increaseStock (Long id, int quantity) {
         Product product = productRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Product not found with id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Product not found"));
         product.setQuantity(product.getQuantity() + quantity);
         productRepository.save(product);
    }
